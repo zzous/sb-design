@@ -1,0 +1,292 @@
+/* ── Layout ── */
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background-color: var(--color-neutral-0);
+  border-right: 1px solid var(--color-neutral-200);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6) 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-4) var(--space-6);
+}
+
+.logoMark {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-primary-500), var(--color-secondary-500));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-md);
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-900);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 var(--space-3);
+  flex: 1;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-600);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.navItem:hover {
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-900);
+}
+
+.navItemActive {
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-600);
+  font-weight: var(--font-weight-semibold);
+}
+
+.navItemActive:hover {
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-700);
+}
+
+.sidebarUser {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-top: 1px solid var(--color-neutral-200);
+  margin-top: auto;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary-400), var(--color-secondary-400));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  flex-shrink: 0;
+}
+
+/* ── Main ── */
+.main {
+  flex: 1;
+  overflow-y: auto;
+  background-color: var(--color-neutral-50);
+}
+
+.page {
+  padding: var(--space-8);
+  max-width: 1100px;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+/* ── Summary Grid ── */
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.summaryValue {
+  margin: var(--space-1) 0;
+}
+
+/* ── Account Cards ── */
+.accountGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.accountCard {
+  background: linear-gradient(135deg, var(--accent, var(--color-primary-500)) 0%, rgba(255,255,255,0) 100%),
+              var(--color-neutral-0);
+  background-color: var(--accent, var(--color-primary-500));
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.accountCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.accountCardTop {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.accountCard .accountCardTop * { color: rgba(255,255,255,0.9); }
+
+.accountBalance {
+  color: #fff !important;
+}
+
+/* Override button colors inside accountCard */
+.accountCard button {
+  border-color: rgba(255,255,255,0.5) !important;
+  color: #fff !important;
+}
+.accountCard button:hover:not(:disabled) {
+  background-color: rgba(255,255,255,0.15) !important;
+}
+
+/* ── Transactions ── */
+.section {
+  margin-bottom: var(--space-8);
+}
+
+.sectionLabel {
+  margin-bottom: var(--space-4);
+}
+
+.txHeader {
+  margin-bottom: var(--space-4);
+}
+
+.txList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.txRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-neutral-100);
+}
+
+.txRow:last-child {
+  border-bottom: none;
+}
+
+.txIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.txIconIn {
+  background-color: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.txIconOut {
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-500);
+}
+
+.txInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.txAmount {
+  text-align: right;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Send ── */
+.sendWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.sendSuccess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-16);
+  text-align: center;
+}
+
+.successIcon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: var(--color-success-light);
+  color: var(--color-success);
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .summaryGrid { grid-template-columns: repeat(2, 1fr); }
+  .accountGrid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .sidebar { display: none; }
+  .page { padding: var(--space-4); }
+  .summaryGrid { grid-template-columns: 1fr; }
+}

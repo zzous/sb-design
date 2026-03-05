@@ -1,0 +1,15 @@
+{
+  "name": "starbanking-monorepo",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "pnpm --filter @starbanking/sample-page dev",
+    "storybook": "pnpm --filter @starbanking/design-system storybook",
+    "build": "pnpm --filter @starbanking/design-system build && pnpm --filter @starbanking/sample-page build",
+    "build:ds": "pnpm --filter @starbanking/design-system build",
+    "build:storybook": "pnpm --filter @starbanking/design-system build-storybook"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
+  }
+}

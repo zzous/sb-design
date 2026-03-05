@@ -1,0 +1,98 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.label {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-700);
+  line-height: var(--line-height-normal);
+}
+
+.required {
+  color: var(--color-error);
+  margin-left: 2px;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-900);
+  background-color: var(--color-neutral-0);
+  border: 1.5px solid var(--color-neutral-300);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--color-neutral-400);
+}
+
+.input:focus {
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.12);
+}
+
+.input:disabled {
+  background-color: var(--color-neutral-50);
+  color: var(--color-neutral-400);
+  cursor: not-allowed;
+}
+
+/* Sizes */
+.sm .input { padding: var(--space-2) var(--space-3); height: 32px; font-size: var(--font-size-xs); }
+.md .input { padding: var(--space-2) var(--space-3); height: 40px; }
+.lg .input { padding: var(--space-3) var(--space-4); height: 48px; font-size: var(--font-size-md); }
+
+.sm { font-size: var(--font-size-xs); }
+.md { font-size: var(--font-size-sm); }
+.lg { font-size: var(--font-size-md); }
+
+/* Error state */
+.error .input {
+  border-color: var(--color-error);
+}
+.error .input:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(255, 86, 48, 0.12);
+}
+
+/* Prefix/Suffix icons */
+.hasPrefix .input { padding-left: var(--space-10); }
+.hasSuffix .input { padding-right: var(--space-10); }
+
+.prefix,
+.suffix {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-neutral-400);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+.prefix { left: var(--space-3); }
+.suffix { right: var(--space-3); }
+
+.helperText {
+  font-size: var(--font-size-xs);
+  color: var(--color-neutral-500);
+  line-height: var(--line-height-normal);
+}
+
+.errorText {
+  font-size: var(--font-size-xs);
+  color: var(--color-error);
+  line-height: var(--line-height-normal);
+}

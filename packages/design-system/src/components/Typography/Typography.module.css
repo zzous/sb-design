@@ -1,0 +1,30 @@
+.base {
+  font-family: var(--font-family-base);
+  margin: 0;
+}
+
+/* Heading */
+.h1 { font-size: var(--font-size-4xl); font-weight: var(--font-weight-bold);    line-height: var(--line-height-tight);  color: var(--color-neutral-900); }
+.h2 { font-size: var(--font-size-3xl); font-weight: var(--font-weight-bold);    line-height: var(--line-height-tight);  color: var(--color-neutral-900); }
+.h3 { font-size: var(--font-size-2xl); font-weight: var(--font-weight-semibold);line-height: var(--line-height-snug);   color: var(--color-neutral-900); }
+.h4 { font-size: var(--font-size-xl);  font-weight: var(--font-weight-semibold);line-height: var(--line-height-snug);   color: var(--color-neutral-900); }
+.h5 { font-size: var(--font-size-lg);  font-weight: var(--font-weight-semibold);line-height: var(--line-height-snug);   color: var(--color-neutral-800); }
+.h6 { font-size: var(--font-size-md);  font-weight: var(--font-weight-semibold);line-height: var(--line-height-normal); color: var(--color-neutral-800); }
+
+/* Body */
+.body1 { font-size: var(--font-size-md); line-height: var(--line-height-relaxed); color: var(--color-neutral-700); }
+.body2 { font-size: var(--font-size-sm); line-height: var(--line-height-normal);  color: var(--color-neutral-700); }
+
+/* Caption / overline */
+.caption  { font-size: var(--font-size-xs); line-height: var(--line-height-normal); color: var(--color-neutral-500); }
+.overline { font-size: var(--font-size-xs); line-height: var(--line-height-normal); color: var(--color-neutral-500); text-transform: uppercase; letter-spacing: 0.08em; font-weight: var(--font-weight-semibold); }
+.label    { font-size: var(--font-size-sm); line-height: var(--line-height-normal); color: var(--color-neutral-600); font-weight: var(--font-weight-medium); }
+
+/* Color overrides */
+.colorDefault { color: inherit; }
+.colorPrimary { color: var(--color-primary-500); }
+.colorSecondary { color: var(--color-secondary-600); }
+.colorSuccess { color: var(--color-success); }
+.colorWarning { color: var(--color-warning); }
+.colorError { color: var(--color-error); }
+.colorMuted { color: var(--color-neutral-400); }
