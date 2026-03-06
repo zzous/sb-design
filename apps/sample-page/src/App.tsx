@@ -200,7 +200,7 @@ export default function App() {
 
       {/* ── Footer ── */}
       <footer id="adminFooter">
-        ⓒ2023 KB Ins. All rights Reserved
+        ⓒ2023 KB Ins. All rights Reserved1
       </footer>
     </div>
   );
