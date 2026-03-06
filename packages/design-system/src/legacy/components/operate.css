@@ -1,0 +1,85 @@
+.ui-word-filter {
+  position: relative;
+  padding: 30px;
+  border: 1px solid #d2d2d2;
+  border-radius: 5px;
+}
+
+.ui-word-filter .add-word {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
+.ui-word-filter-item:first-of-type {
+  margin-top: 0;
+}
+
+.ui-word-filter-item {
+  margin-top: 20px;
+}
+
+.ui-word-filter-item .ui-word-key {
+  display: flex;
+  align-items: center;
+}
+
+.ui-word-filter-item .ui-word-key dt {
+  width: 80px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.ui-word-filter-item .ui-word-key dd {
+  display: flex;
+  align-items: center;
+}
+
+.ui-word-filter-item .ui-word-key dd + dd {
+  margin-left: 6px;
+}
+
+.ui-word-filter-item .ui-word-key dd > * + * {
+  margin-left: 10px;
+}
+
+.ui-word-filter-item .ui-word-key .btn-key {
+  display: block;
+  min-width: 30px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 8px;
+  border: 1px solid #d2d2d2;
+  background-color: #fff;
+  font-size: 14px;
+  color: #767676;
+  text-align: center;
+  border-radius: 30px;
+}
+
+.ui-word-filter-item .ui-word-key .btn-key.active {
+  border-color: #ffed90;
+  background-color: #ffed90;
+  font-weight: bold;
+  color: #222;
+}
+
+.ui-word-list {
+  padding: 10px 20px 20px;
+  border-top: 2px solid #355d9c;
+  border-bottom: 1px solid #d2d2d2;
+  border-radius: 2px 2px  0 0;
+  overflow: hidden;
+}
+
+.ui-word-list ul li {
+  position: relative;
+  display: inline-block;
+  height: 32px;
+  line-height: 32px;
+  margin: 10px 10px 0 0;
+  padding:0 15px;
+  border: 1px solid #d2d2d2;
+  background-color: #f7f7f7;
+  border-radius: 32px;
+}

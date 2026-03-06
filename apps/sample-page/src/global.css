@@ -78,3 +78,16 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* ── Admin nav active item ── */
+.admin-menu-item.dep2.active,
+.admin-menu-item.dep3.active {
+  background-color: #e4ebf5;
+  color: #253349;
+  font-weight: bold;
+}
+
+/* ── Admin container section ── */
+#adminContainer .s1 {
+  margin-top: 20px;
+}

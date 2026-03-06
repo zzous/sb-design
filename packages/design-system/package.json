@@ -8,7 +8,8 @@
       "import": "./src/index.ts",
       "types": "./src/index.ts"
     },
-    "./styles": "./src/tokens/index.css"
+    "./styles": "./src/tokens/index.css",
+    "./legacy-styles": "./src/legacy/admin.css"
   },
   "scripts": {
     "build": "tsc --noEmit",

@@ -107,4 +107,16 @@
   --transition-fast:   100ms ease;
   --transition-normal: 200ms ease;
   --transition-slow:   300ms ease;
+
+  /* ── Legacy variable aliases (maps css/ folder variables to design tokens) ── */
+  --base-txt-color:        var(--color-neutral-600);
+  --strong-txt-color:      var(--color-neutral-900);
+  --primary-txt-color:     #ffbc00;
+  --point-txt-color:       #287eff;
+  --error-txt-color:       #ff3232;
+  --placeholder-txt-color: var(--color-neutral-400);
+  --base-bg-color:         var(--color-neutral-50);
+  --base-bd-color:         var(--color-neutral-300);
+  --bd1-color:             var(--color-neutral-300);
+  --bd2-color:             var(--color-neutral-200);
 }

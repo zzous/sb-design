@@ -1,126 +1,100 @@
-/* ── Backdrop ── */
+/* ── Backdrop : .ui-modal + dimmed ── */
 .backdrop {
+  display: flex;
   position: fixed;
   inset: 0;
-  background-color: rgba(16, 24, 40, 0.5);
-  display: flex;
+  z-index: 999;
   align-items: center;
   justify-content: center;
-  padding: var(--space-4);
-  z-index: 1000;
-  animation: fadeIn var(--transition-fast) ease;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-/* ── Panel ── */
+/* ── Panel : .ui-modal-wrap ── */
 .panel {
-  background-color: var(--color-neutral-0);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-xl);
+  position: relative;
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - var(--space-8));
-  width: 100%;
-  animation: slideUp var(--transition-normal) ease;
+  width: 640px;
+  max-height: calc(100vh - 100px);
+  overflow: hidden;
+  border-radius: 3px;
+  box-shadow: 0 8px 24px 0px rgba(0, 0, 0, 0.1);
   outline: none;
+  transition: 0.3s ease-out;
 }
 
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(16px) scale(0.98); }
-  to   { opacity: 1; transform: translateY(0)   scale(1); }
-}
+/* ── Sizes ── */
+.sm  { max-width: 400px;  }
+.md  { max-width: 640px;  }
+.lg  { max-width: 940px;  }
+.xl  { max-width: 1200px; }
+.full { max-width: calc(100vw - 40px); max-height: calc(100vh - 40px); }
 
-/* Sizes */
-.sm { max-width: 400px; }
-.md { max-width: 560px; }
-.lg { max-width: 720px; }
-.xl { max-width: 960px; }
-.full {
-  max-width: calc(100vw - var(--space-8));
-  max-height: calc(100vh - var(--space-8));
-}
-
-/* ── Header ── */
+/* ── Header : .ui-modal-head ── */
 .header {
+  position: relative;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: var(--space-4);
-  padding: var(--space-6) var(--space-6) 0;
+  background-color: #253349;
+  padding: 14px 20px;
   flex-shrink: 0;
 }
 
 .headerText { flex: 1; min-width: 0; }
 
+/* ── Title : .ui-modal-title ── */
 .title {
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-neutral-900);
-  line-height: var(--line-height-tight);
+  font-family: var(--font-family-base, sans-serif);
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
   margin: 0;
+  line-height: 1.3;
 }
 
 .description {
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-sm);
-  color: var(--color-neutral-500);
-  margin: var(--space-1) 0 0;
-  line-height: var(--line-height-normal);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 4px 0 0;
 }
 
+/* ── Close button : .ui-modal-close ── */
 .closeBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 53px;
+  height: 53px;
   border: none;
-  background: transparent;
-  color: var(--color-neutral-400);
+  background: transparent url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M3.29485 15.2916C2.90432 15.6821 2.90432 16.3153 3.29485 16.7058C3.68537 17.0963 4.31854 17.0963 4.70906 16.7058L9.99981 11.4151L15.2918 16.7071C15.6824 17.0976 16.3155 17.0976 16.706 16.7071C17.0966 16.3166 17.0966 15.6834 16.706 15.2929L11.414 10.0008L16.706 4.70882C17.0966 4.31829 17.0966 3.68513 16.706 3.2946C16.3155 2.90408 15.6824 2.90408 15.2918 3.2946L9.99981 8.58663L4.70906 3.29588C4.31854 2.90536 3.68537 2.90536 3.29485 3.29588C2.90432 3.68641 2.90432 4.31957 3.29485 4.7101L8.58559 10.0008L3.29485 15.2916Z' fill='%23ffffff'/%3E%3C/svg%3E") 50% 50% no-repeat;
   cursor: pointer;
-  border-radius: var(--radius-md);
-  padding: 0;
   flex-shrink: 0;
-  transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
-.closeBtn:hover {
-  background-color: var(--color-neutral-100);
-  color: var(--color-neutral-700);
-}
+.closeBtn > * { display: none; }
 
-.closeBtn:focus-visible {
-  outline: 2px solid var(--color-primary-400);
-  outline-offset: 2px;
-}
-
-/* ── Body ── */
+/* ── Body : .ui-modal-body ── */
 .body {
-  padding: var(--space-5) var(--space-6);
+  flex: 1 1 auto;
   overflow-y: auto;
-  flex: 1;
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-sm);
-  color: var(--color-neutral-700);
-  line-height: var(--line-height-relaxed);
+  padding: 32px 30px 0;
+  background-color: #fff;
+  font-family: var(--font-family-base, sans-serif);
+  font-size: 12px;
+  color: #444;
+  line-height: 1.6;
 }
 
-/* ── Footer ── */
+/* ── Footer : .ui-modal-footer ── */
 .footer {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--space-2);
-  padding: 0 var(--space-6) var(--space-6);
+  gap: 8px;
+  padding: 20px 30px 30px;
+  background-color: #fff;
   flex-shrink: 0;
-  border-top: 1px solid var(--color-neutral-100);
-  padding-top: var(--space-4);
-  margin-top: auto;
 }
 
 .footer.footerLeft { justify-content: flex-start; }

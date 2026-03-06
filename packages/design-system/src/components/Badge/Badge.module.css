@@ -1,50 +1,82 @@
+/* ── Base : .ui-tag ── */
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
-  font-family: var(--font-family-base);
-  font-weight: var(--font-weight-medium);
-  border-radius: var(--radius-full);
-  line-height: 1;
+  gap: 4px;
+  font-family: var(--font-family-base, sans-serif);
+  font-weight: bold;
+  text-align: center;
+  border-radius: 20px;
   white-space: nowrap;
+  line-height: 1;
 }
 
-/* Sizes */
-.sm { font-size: 11px; padding: 2px 8px; }
-.md { font-size: var(--font-size-xs); padding: 3px 10px; }
-.lg { font-size: var(--font-size-sm); padding: 4px 12px; }
+/* ── Sizes : .ui-tag.s / default / .ui-tag.l ── */
+.sm {
+  height: 16px;
+  line-height: 16px;
+  padding: 0 8px;
+  font-size: 10px;
+}
+.md {
+  height: 20px;
+  line-height: 20px;
+  padding: 0 10px;
+  font-size: 11px;
+}
+.lg {
+  height: 32px;
+  line-height: 32px;
+  padding: 0 12px;
+  font-size: 12px;
+}
 
-/* Variants */
+/* ── Variants : .ui-tag.bc1/.bc2/.bc3 기반 ── */
+/* primary → bc1 yellow */
 .primary {
-  background-color: var(--color-primary-50);
-  color: var(--color-primary-600);
-}
-.secondary {
-  background-color: var(--color-secondary-50);
-  color: var(--color-secondary-700);
-}
-.success {
-  background-color: var(--color-success-light);
-  color: var(--color-success-dark);
-}
-.warning {
-  background-color: var(--color-warning-light);
-  color: var(--color-warning-dark);
-}
-.error {
-  background-color: var(--color-error-light);
-  color: var(--color-error-dark);
-}
-.info {
-  background-color: var(--color-info-light);
-  color: var(--color-info-dark);
-}
-.neutral {
-  background-color: var(--color-neutral-100);
-  color: var(--color-neutral-700);
+  background-color: #fed700;
+  color: #000;
 }
 
-/* Dot */
+/* secondary → dark bordered */
+.secondary {
+  border: 1px solid #464646;
+  background-color: #fff;
+  color: #222;
+}
+
+/* success → green */
+.success {
+  background-color: #d1fae5;
+  color: #1d7a57;
+}
+
+/* warning → orange/yellow */
+.warning {
+  background-color: #fff3cd;
+  color: #b85e00;
+}
+
+/* error → red */
+.error {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+/* info → blue */
+.info {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+/* neutral → bc3 gray bordered */
+.neutral {
+  border: 1px solid #d2d2d2;
+  background-color: #fff;
+  color: #444;
+}
+
+/* ── Dot ── */
 .dot {
   width: 6px;
   height: 6px;

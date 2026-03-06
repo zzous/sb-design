@@ -1,124 +1,6 @@
-/* ── Layout ── */
-.app {
-  display: flex;
-  min-height: 100vh;
-}
-
-/* ── Sidebar ── */
-.sidebar {
-  width: 220px;
-  flex-shrink: 0;
-  background-color: var(--color-neutral-0);
-  border-right: 1px solid var(--color-neutral-200);
-  display: flex;
-  flex-direction: column;
-  padding: var(--space-6) 0;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow-y: auto;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: 0 var(--space-4) var(--space-6);
-}
-
-.logoMark {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--color-primary-500), var(--color-secondary-500));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-md);
-  flex-shrink: 0;
-}
-
-.logoText {
-  font-weight: var(--font-weight-bold);
-  color: var(--color-neutral-900);
-}
-
-.nav {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 0 var(--space-3);
-  flex: 1;
-}
-
-.navItem {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: var(--space-2) var(--space-3);
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-neutral-600);
-  background: transparent;
-  border: none;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  text-align: left;
-  transition: background-color var(--transition-fast), color var(--transition-fast);
-}
-
-.navItem:hover {
-  background-color: var(--color-neutral-100);
-  color: var(--color-neutral-900);
-}
-
-.navItemActive {
-  background-color: var(--color-primary-50);
-  color: var(--color-primary-600);
-  font-weight: var(--font-weight-semibold);
-}
-
-.navItemActive:hover {
-  background-color: var(--color-primary-100);
-  color: var(--color-primary-700);
-}
-
-.sidebarUser {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-4);
-  border-top: 1px solid var(--color-neutral-200);
-  margin-top: auto;
-}
-
-.avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-primary-400), var(--color-secondary-400));
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
-  flex-shrink: 0;
-}
-
-/* ── Main ── */
-.main {
-  flex: 1;
-  overflow-y: auto;
-  background-color: var(--color-neutral-50);
-}
-
+/* ── Page (어드민 container 안에서의 콘텐츠 래퍼) ── */
 .page {
-  padding: var(--space-8);
-  max-width: 1100px;
+  padding: 20px 0 0;
 }
 
 .pageHeader {
@@ -279,8 +161,72 @@
   justify-content: center;
 }
 
+/* ── Banner Register ── */
+.bannerMain {
+  min-width: 0;
+}
+
+.bannerSide {
+  min-width: 0;
+}
+
+.bannerPreview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.bannerLayout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.bannerActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-neutral-200);
+}
+
+.bannerThumb {
+  margin-top: var(--space-4);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-neutral-200);
+}
+
+.bannerThumbImg {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.bannerPreviewImg {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  display: block;
+}
+
+.bannerPreviewEmpty {
+  width: 100%;
+  height: 200px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-neutral-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ── Responsive ── */
 @media (max-width: 900px) {
+  .bannerLayout { grid-template-columns: 1fr; }
   .summaryGrid { grid-template-columns: repeat(2, 1fr); }
   .accountGrid { grid-template-columns: 1fr; }
 }

@@ -10,12 +10,14 @@ export type BadgeVariant =
   | 'info'
   | 'neutral';
 export type BadgeSize = 'sm' | 'md' | 'lg';
+export type BadgeType = 'a' | 'b' | 'c'
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant?: BadgeVariant;
   size?: BadgeSize;
   dot?: boolean;
   children?: React.ReactNode;
+  contorl?: BadgeType;
 }
 
 export const Badge: React.FC<BadgeProps> = ({
@@ -23,6 +25,7 @@ export const Badge: React.FC<BadgeProps> = ({
   size = 'md',
   dot = false,
   children,
+  contorl='b',
   className = '',
   ...rest
 }) => {
@@ -31,9 +34,11 @@ export const Badge: React.FC<BadgeProps> = ({
     .join(' ');
 
   return (
-    <span className={classes} {...rest}>
+    <span className={classes} {...rest} data-type={contorl}>
+      <div>
       {dot && <span className={styles.dot} aria-hidden="true" />}
       {children}
+     </div>
     </span>
   );
 };

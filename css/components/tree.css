@@ -1,0 +1,284 @@
+/*****************************************************************
+    code
+*****************************************************************/
+.ui-code-group {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ui-code-group::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 33%;
+    width: 50px;
+    height: 50px;
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' %3F%3E%3Csvg class='feather feather-arrow-right-circle' fill='none' height='24' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpolyline points='12 16 16 12 12 8'/%3E%3Cline x1='8' x2='16' y1='12' y2='12'/%3E%3C/svg%3E");
+    background-size: 50px 50px;
+}
+
+.ui-code-tree {
+    width: 30%;
+}
+
+.ui-code-reg {
+    width: 60%;
+}
+
+.ui-code-tree-wrap {
+    padding: 15px;
+    border-width: 2px 1px 1px;
+    border-style: solid;
+    border-color: #355d9c #d2d2d2 #d2d2d2;
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
+}
+
+.ui-code-tree-head {
+    padding: 15px;
+    background-color: #f7f7f7;
+    border-radius: 3px;
+}
+
+.ui-code-tree-head + .ui-code-tree-head {
+    margin-top: 10px;
+}
+
+.ui-code-tree-head h3 {
+    margin-bottom: 10px;
+}
+
+.ui-code-tree-search, .ui-code-tree-form {
+    display: flex;
+    align-items: center;
+}
+
+.ui-code-tree-form label {
+    display: block;
+    min-width: 70px;
+}
+
+.ui-code-tree-search *+*, .ui-code-tree-form *+* {
+    margin-left: 7px;
+}
+
+.ui-code-tree-form + .ui-code-tree-form {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #d2d2d2;
+}
+
+.ui-code-tree-search + .ui-code-tree-btn-set {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #d2d2d2;
+}
+
+.ui-code-tree-btn-set {
+    display: flex;
+    justify-content: end;
+    position: relative;
+}
+
+.ui-code-tree-btn-set .checkbox {
+    position: absolute;
+    top: 15px;
+    left: 0;
+}
+
+.ui-code-tree-list {
+    max-height: 600px;
+    margin-top: 20px;
+    overflow-y: auto;
+}
+
+.ui-code-tree-list .home {
+    display: flex;
+    align-items: center;
+}
+
+.ui-code-tree-list .home::before {
+    content: '';
+    width: 32px;
+    height: 32px;
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M12 7.41418L12 12H10V9.99997C10 8.8954 9.10457 7.99997 8 7.99997C6.89543 7.99997 6 8.8954 6 9.99997V12H4V7.41418L8 3.41418L12 7.41418ZM7 12V9.99997C7 9.44769 7.44772 8.99997 8 8.99997C8.55228 8.99997 9 9.44769 9 9.99997V12H7ZM6.4536 13H4C3.44772 13 3 12.5523 3 12V7.41418C3 7.14897 3.10536 6.89461 3.29289 6.70708L7.29289 2.70708C7.68342 2.31655 8.31658 2.31655 8.70711 2.70708L12.7071 6.70708C12.8946 6.89461 13 7.14897 13 7.41418V12C13 12.5523 12.5523 13 12 13H9.5464C9.54608 13 9.54577 13 9.54545 13H6.45455C6.45423 13 6.45392 13 6.4536 13Z' fill='%23767676'/%3E%3C/svg%3E");
+    background-size: 32px 32px;
+}
+
+.ui-tree-list {
+    position: relative;
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+.ui-tree-list li {
+    position: relative
+}
+
+.ui-tree-list>li {
+    padding-left: 33px;
+}
+
+.ui-tree-list li::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 1px;
+    background-color: #cacaca;
+    height: calc(100% + 10px);
+}
+
+.ui-tree-list li:last-child::after {
+    height: 20px;
+}
+
+.ui-tree-list li+li {
+    margin-top: 10px;
+}
+
+.ui-tree-list li .checkbox {
+    margin: 1px 0 0 -4px;
+    vertical-align: top;
+}
+
+.ui-tree-list button,
+.ui-tree-list a {
+    position: relative;
+    display: inline-block;
+    padding-left: 12px;
+    min-width: 21px;
+    min-height: 21px;
+    text-align: left;
+}
+
+.ui-tree-list button.on,
+.ui-tree-list a.on {
+    color: #fcaf17;
+    font-weight: bold;
+    border-color: #fcaf17 !important;
+}
+
+.ui-tree-list button::before,
+.ui-tree-list a::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -33px;
+    margin-top: -1px;
+    display: block;
+    width: 33px;
+    height: 1px;
+    background-color: #cacaca;
+}
+
+.ui-tree-list .dep {
+    position: relative;
+    display: none;
+    padding-top: 10px;
+    margin-left: 10px;
+}
+
+.ui-tree-list .dep li {
+    padding-left: 25px;
+}
+
+.ui-tree-list .dep button::before,
+.ui-tree-list .dep a::before {
+    left: -25px;
+    width: 25px;
+}
+
+.ui-tree-list .unfold>.dep {
+    display: block;
+}
+
+.ui-tree-list li.fold>button,
+.ui-tree-list li.unfold>button,
+.ui-tree-list li.fold>a,
+.ui-tree-list li.unfold>a {
+    padding-left: 33px;
+}
+
+.ui-tree-list li.fold>button::after,
+.ui-tree-list li.fold>a::after,
+.ui-tree-list li.unfold>button::after,
+.ui-tree-list li.unfold>a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 19px;
+    height: 19px;
+    background-size: 12px 12px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    border: 1px solid #d2d2d2;
+    border-radius: 3px;
+}
+
+.ui-tree-list li.fold>button::after,
+.ui-tree-list li.fold>a::after {
+
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='5' y='1.00003' width='2' height='10' fill='%23767676'/%3E%3Crect x='11' y='5.00003' width='2' height='10' transform='rotate(90 11 5.00003)' fill='%23767676'/%3E%3C/svg%3E");
+
+}
+
+.ui-tree-list li.unfold>button::after,
+.ui-tree-list li.unfold>a::after {
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='11' y='5.00003' width='2' height='10' transform='rotate(90 11 5.00003)' fill='%23767676'/%3E%3C/svg%3E");
+}
+
+.ui-tree-list button span,
+.ui-tree-list a span {
+    display: inline-block;
+    line-height: 21px;
+    min-height: 21px;
+}
+
+.ui-tree-list button span.folder,
+.ui-tree-list a span.folder {
+    position: relative;
+    padding-left: 32px;
+}
+
+.ui-tree-list button span.folder::before,
+.ui-tree-list a span.folder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' %3F%3E%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19,5.5H12.72l-.32-1a3,3,0,0,0-2.84-2H5a3,3,0,0,0-3,3v13a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V8.5A3,3,0,0,0,19,5.5Zm1,13a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V5.5a1,1,0,0,1,1-1H9.56a1,1,0,0,1,.95.68l.54,1.64A1,1,0,0,0,12,7.5h7a1,1,0,0,1,1,1Z' fill='%23767676'/%3E%3C/svg%3E");
+    background-size: 20px 20px;
+}
+
+.ui-tree-list .unfold>button span.folder,
+.ui-tree-list .unfold>a span.folder {
+    position: relative;
+}
+
+.ui-tree-list .unfold>button span.folder::before,
+.ui-tree-list .unfold>a span.folder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' %3F%3E%3Csvg data-name='Layer 1' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M22.78,10.37A1,1,0,0,0,22,10H20V9a3,3,0,0,0-3-3H10.72l-.32-1A3,3,0,0,0,7.56,3H4A3,3,0,0,0,1,6V18a3,3,0,0,0,3,3H18.4a3,3,0,0,0,2.92-2.35L23,11.22A1,1,0,0,0,22.78,10.37ZM5.37,18.22a1,1,0,0,1-1,.78H4a1,1,0,0,1-1-1V6A1,1,0,0,1,4,5H7.56a1,1,0,0,1,1,.68l.54,1.64A1,1,0,0,0,10,8h7a1,1,0,0,1,1,1v1H8a1,1,0,0,0-1,.78Zm14,0a1,1,0,0,1-1,.78H7.21a1.42,1.42,0,0,0,.11-.35L8.8,12h12Z' fill='%23767676'/%3E%3C/svg%3E");
+    background-size: 20px 20px;
+}
+
+.ui-tree-list .new button,
+.ui-tree-list .new a {
+    min-width: 200px;
+    border: 1px solid #d0d0d0;
+    padding: 8px 20px;
+}
+
+.ui-tree-list .new:last-child::after {
+    height: 30px;
+}

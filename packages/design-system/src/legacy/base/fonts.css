@@ -1,0 +1,39 @@
+@font-face{
+	font-family:'KBFGText';
+	font-style:normal;
+	font-weight:normal;
+	font-display:fallback;
+	src:url('../../fonts/KBFGTextL.eot');/* IE9 Compat Modes */
+	src:local('KBFGText'),local('KBFG-text'),
+		 url('../../fonts/KBFGTextL.eot?#iefix') format('embedded-opentype'),/* IE6-IE8 */
+		 url('../../fonts/KBFGTextL.woff') format('woff'),/* Modern Browsers */
+		 url('../../fonts/KBFGTextL.otf') format('otf');
+}
+@font-face{
+	font-family:'KBFGText';
+	font-style:normal;
+	font-weight:600;
+	font-display:fallback;
+	src:url('../../fonts/KBFGTextM.eot');/* IE9 Compat Modes */
+	src:local('KBFGText'),local('KBFG-text'),
+		 url('../../fonts/KBFGTextM.eot?#iefix') format('embedded-opentype'),/* IE6-IE8 */
+		 url('../../fonts/KBFGTextM.woff') format('woff'),/* Modern Browsers */
+		 url('../../fonts/KBFGTextM.otf') format('otf');
+}
+@font-face{
+	font-family:'KBFGText';
+	font-style:normal;
+	font-weight:700;
+	font-display:fallback;
+	src:local('KBFGText'),local('KBFG-text'),
+		 url('../../fonts/KBFGTextB.woff') format('woff'),/* Modern Browsers */
+}
+
+@font-face {
+    font-family:'KBFGText';font-style:normal;font-weight:400;    
+	src:url('../../fonts/kbfg_text_l.woff') format('woff');
+}
+@font-face {
+    font-family:'KBFGText';font-style:normal;font-weight:700;    
+	src:url('../../fonts/kbfg_text_b.woff') format('woff'); 
+}

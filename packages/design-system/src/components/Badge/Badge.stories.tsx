@@ -16,6 +16,10 @@ const meta: Meta<typeof Badge> = {
       options: ['sm', 'md', 'lg'],
     },
     dot: { control: 'boolean', description: '상태 점 표시' },
+    contorl: {
+      control: 'radio',
+      options: ['a', 'b', 'c'],
+    },
     children: { control: 'text' },
   },
   args: {
@@ -34,13 +38,12 @@ export const Playground: Story = {};
 export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
-      <Badge variant="primary">Primary</Badge>
+      <Badge variant="primary" >Primary</Badge>
       <Badge variant="secondary">Secondary</Badge>
       <Badge variant="success">Success</Badge>
       <Badge variant="warning">Warning</Badge>
       <Badge variant="error">Error</Badge>
       <Badge variant="info">Info</Badge>
-      <Badge variant="neutral">Neutral</Badge>
     </div>
   ),
 };
@@ -63,6 +66,31 @@ export const Sizes: Story = {
       <Badge size="sm" variant="primary">Small</Badge>
       <Badge size="md" variant="primary">Medium</Badge>
       <Badge size="lg" variant="primary">Large</Badge>
+    </div>
+  ),
+};
+
+export const ContorlTypes: Story = {
+  name: 'data-type (contorl)',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      {(['a', 'b', 'c'] as const).map((type) => (
+        <div key={type} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <Badge contorl={type}>Badge</Badge>
+          <span style={{ fontSize: '0.75rem', color: '#667085' }}>data-type="{type}"</span>
+        </div>
+      ))}
+    </div>
+  ),
+};
+
+export const InLogoContext: Story = {
+  name: '로고 컨텍스트 예시',
+  render: () => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 16px', background: '#1d2939', borderRadius: 8 }}>
+      <div style={{ width: 32, height: 32, borderRadius: 8, background: '#0052cc', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700 }}>S</div>
+      <span style={{ color: '#fff', fontWeight: 600, fontSize: '1rem' }}>StarBanking</span>
+      <Badge>Badge</Badge>
     </div>
   ),
 };

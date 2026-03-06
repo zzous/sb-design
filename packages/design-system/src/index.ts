@@ -21,3 +21,6 @@ export type { ModalProps, ModalSize, ModalFooterAlign } from './components/Modal
 
 export { ToastProvider, useToast } from './components/Toast';
 export type { ToastProviderProps, ToastOptions, ToastItem, ToastVariant, ToastPosition } from './components/Toast';
+
+export { Select } from './components/Select';
+export type { SelectProps, SelectSize, SelectOption } from './components/Select';

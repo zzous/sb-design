@@ -1,0 +1,719 @@
+/*****************************************************************
+   input text
+*****************************************************************/
+.form-control {
+  width: 100%;
+  height: 32px;
+  padding: 10px;
+  border: 1px solid var(--base-bd-color);
+  border-radius: 3px;
+  font-weight: 400;
+  font-size: 12px;
+  color: #222;
+}
+
+.form-control.slm {
+  height: 30px;
+}
+
+.form-control.sm {
+  height: 28px;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #f2f2f2;
+  color: #999;
+  opacity: 1;
+}
+
+.form-control:focus,
+.form-control.active {
+  border-color: #999;
+}
+
+.form-control.error {
+  border-color: #ff3232;
+}
+
+input[type='password'].form-control {
+  font-size: 20px;
+}
+
+.input-guide {
+  display: block;
+  position: relative;
+  margin-top: 6px;
+  padding-left: 18px;
+  font-size: 11px;
+  color: #767676;
+}
+
+.input-guide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='32' height='32' fill='none'/%3E%3Crect x='1' y='1' width='30' height='30' rx='15' fill='%23CCCCCC'/%3E%3Crect x='14.4004' y='13.6001' width='3.2' height='9.6' rx='1.6' fill='white'/%3E%3Crect x='14.4004' y='8.80002' width='3.2' height='3.2' rx='1.6' fill='white'/%3E%3C/svg%3E");
+  background-size: 14px 14px;
+}
+
+.input-guide.error {
+  color: #ff3232;
+}
+
+.input-guide.error::before {
+  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='32' height='32' fill='none'/%3E%3Crect x='1' y='1' width='30' height='30' rx='15' fill='%23ff3232'/%3E%3Crect x='14.4004' y='13.6001' width='3.2' height='9.6' rx='1.6' fill='white'/%3E%3Crect x='14.4004' y='8.80002' width='3.2' height='3.2' rx='1.6' fill='white'/%3E%3C/svg%3E");
+}
+
+.input-guide .input-guide-sub {
+  display: block;
+  margin-top: 6px;
+}
+
+.input-timer {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  color: #767676;
+}
+
+.input-timer strong {
+  color: #444;
+}
+
+/*****************************************************************
+  textarea
+*****************************************************************/
+.textarea {
+  position: relative;
+  width: 100%;
+}
+
+.textarea .txt-counter {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 12px;
+  color: #999;
+}
+
+.textarea .txt-counter.error {
+  color: #ff3232;
+}
+
+.auto-height {
+  display: inline-grid !important;
+  align-items: initial !important;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  border: none;
+  vertical-align: top;
+  align-items: stretch
+}
+
+.auto-height textarea {
+  overflow: hidden;
+}
+
+.auto-height textarea,
+.auto-height::after {
+  display: block;
+  height: auto;
+  line-height: 1.4;
+  padding: 8px 10px 7px;
+  font-size: 12px;
+  color: #222;
+  grid-area: 2/1;
+  resize: none;
+}
+
+.auto-height::after {
+  content: attr(data-value) " ";
+  visibility: hidden;
+  white-space: pre-wrap;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none
+}
+
+/*****************************************************************
+   select
+   *****************************************************************/
+.flex>.custom-select {
+  width: 100%;
+}
+
+.custom-select {
+  width: auto;
+  min-width: 120px;
+  height: 32px;
+  padding: 0 23px 0 8px;
+  border-color: var(--base-bd-color);
+  border-radius: 3px;
+  font-size: 12px;
+  color: #222;
+  background: #fff url("data:image/svg+xml,%3Csvg width='13' height='12' viewBox='0 0 13 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.95099 4.20001L6.95099 7.20001L3.95099 4.20001' stroke='%23767676'/%3E%3C/svg%3E") right 9px center no-repeat;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.custom-select + .custom-select, .form-control + .custom-select, .custom-select + .form-control {
+  margin-left: 8px !important;
+}
+
+.custom-select.inline {
+  min-width: auto;
+}
+
+.custom-select.sm {
+  height: 28px;
+}
+
+.custom-select.time {
+  min-width: 60px;
+}
+
+.custom-select:hover:not(:disabled) {
+  background-color: #f2f2f2;
+  color: #444;
+}
+
+.custom-select:disabled {
+  border-color: #ebebeb;
+  color: #ababab;
+}
+
+/*****************************************************************
+  checkbox, radio
+*****************************************************************/
+span.radio input[type="radio"],
+span.checkbox input[type="checkbox"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  overflow: hidden;
+  padding: 0;
+  clip: rect(0, 0, 0, 0);
+  -webkit-appearance: none;
+  opacity: 0
+}
+
+input[type="radio"]+label,
+input[type="checkbox"]+label {
+  display: inline-block;
+  position: relative;
+  min-height: 16px;
+  line-height: 1.4;
+  padding-left: 22px;
+  cursor: pointer;
+}
+
+input[type="radio"]+label.sg,
+input[type="checkbox"]+label.sg {
+  padding-left: 16px;
+  vertical-align: middle
+}
+
+input[type="radio"]+label::before,
+input[type="checkbox"]+label::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  border: 1px solid #999;
+  box-sizing: border-box;
+  background-position: 50% 50%;
+}
+
+input[type="radio"]:disabled+label::before,
+input[type="checkbox"]:disabled+label::before {
+  border-color: #d2d2d2;
+}
+
+input[type="radio"]+label::before {
+  border-radius: 100%;
+}
+
+input[type="radio"]:checked+label::before {
+  border-width: 4px;
+  border-color: #fed700;
+  background-color: #222;
+}
+
+input[type="radio"].readonly:checked+label::before {
+  border-width: 1px;
+  border-color: #d2d2d2;
+  background-color: #fff;
+}
+
+input[type="radio"].readonly:disabled+label::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  background-color: #d2d2d2;
+  border-radius: 100%;
+}
+
+.radio-group.btn-group {
+  display: flex;
+}
+
+.radio-group.btn-group .radio {
+  display: block;
+}
+
+.radio-group.btn-group .radio+.radio {
+  margin-left: 6px;
+}
+
+.radio-group.btn-group .radio input[type="radio"]+label {
+  display: block;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 8px;
+  border: 1px solid #d2d2d2;
+  background-color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  color: #767676;
+  border-radius: 3px;
+}
+
+.radio-group.btn-group .radio input[type="radio"]:checked+label {
+  border-color: #fed700;
+  background-color: #fed700;
+  font-weight: bold;
+  color: #222;
+}
+
+.radio-group.btn-group .radio input[type="radio"]:hover+label {
+  background-color: #f2f2f2;
+}
+
+.radio-group.btn-group .radio input[type="radio"]:checked:hover+label {
+  background-color: #ffed90;
+}
+
+.radio-group.btn-group .radio input[type="radio"]:checked+label {
+  border-color: #fed700;
+  background-color: #fed700;
+  font-weight: bold;
+  color: #222;
+}
+
+.radio-group.btn-group .radio input[type="radio"]:disabled+label {
+  border-color: #ebebeb;
+  color: #a8a8a8;
+}
+
+.radio-group.btn-group .radio input[type="radio"]+label::before,
+.radio-group.btn-group .radio input[type="radio"]+label::after {
+  display: none;
+}
+
+.ui-radio-switch {
+  display: inline-block;
+  padding: 6px;
+  background-color: #f7f7f7;
+  border: 1px solid var(--base-bd2-color);
+  border-radius: 6px;
+}
+
+.ui-radio-switch .radio {
+  display: inline-block;
+}
+
+.ui-radio-switch .radio + .radio {
+  margin-left: -4px;
+}
+
+.ui-radio-switch .radio input[type="radio"]+label {
+  display: block;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 15px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #666;
+  border-radius: 4px;
+}
+
+.ui-radio-switch .radio input[type="radio"]:checked+label {
+  background-color: #ffcc00;
+  color: #222;
+}
+
+.ui-radio-switch .radio input[type="radio"]+label::before,
+.ui-radio-switch .radio input[type="radio"]+label::after {
+  display: none;
+}
+
+input[type="checkbox"]+label::before {
+  border-radius: 3px;
+}
+
+input[type="checkbox"]:checked+label::before {
+  border-color: #ffdd2d;
+  background-color: #ffdd2d;
+}
+
+input[type="checkbox"]:checked+label::before {
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 7.85453L6.85714 10.4L12 4.79999' stroke='%23222222' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+input[type="checkbox"].readonly:disabled+label::before {
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 7.85453L6.85714 10.4L12 4.79999' stroke='%23d2d2d2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.checkbox,
+.radio {
+  position: relative;
+  display: inline-block;
+}
+
+.radio+.radio,
+.checkbox+.checkbox {
+  margin-left: 20px;
+}
+
+.checkbox.sg, .radio.sg {
+  display: inline-block;
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  vertical-align: middle
+}
+
+.checkbox.sg input[type="radio"]+label,
+.radio.sg input[type="checkbox"]+label {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  padding: 0
+}
+
+/*****************************************************************
+   input file
+*****************************************************************/
+.btn-file {
+  display: inline-block;
+}
+
+.btn-file label {
+  display: block;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 8px;
+  border: 1px solid var(--base-bd-color);
+  background-color: #fff;
+  font-size: 12px;
+  color: #464646;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.btn-file label:hover,
+.btn-file label:focus {
+  background-color: #f2f2f2;
+}
+
+.upload-file-box {
+  width: 578px;
+  margin-top: 10px;
+  border: 1px solid var(--base-bd-color);
+  border-radius: 3px;
+}
+
+.upload-file-box .upload-file-head {
+  position: relative;
+  padding: 6px 10px 6px 32px;
+  border-bottom: 1px solid var(--base-bd-color);
+  font-size: 12px;
+  color: #767676;
+}
+
+.upload-file-box .upload-file-head .del-all {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.15035 2.85486C8.95535 2.65986 8.64035 2.65986 8.44535 2.85486L6.00035 5.29486L3.55535 2.84986C3.36035 2.65486 3.04535 2.65486 2.85035 2.84986C2.65535 3.04486 2.65535 3.35986 2.85035 3.55486L5.29535 5.99986L2.85035 8.44486C2.65535 8.63986 2.65535 8.95486 2.85035 9.14986C3.04535 9.34486 3.36035 9.34486 3.55535 9.14986L6.00035 6.70486L8.44535 9.14986C8.64035 9.34486 8.95535 9.34486 9.15035 9.14986C9.34535 8.95486 9.34535 8.63986 9.15035 8.44486L6.70535 5.99986L9.15035 3.55486C9.34035 3.36486 9.34035 3.04486 9.15035 2.85486Z' fill='%23767676'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+}
+
+.upload-file-box .upload-file-list .upload-file-list-item {
+  position: relative;
+  padding: 8px 10px 8px 32px;
+  border: none;
+  font-size: 12px;
+  color: #444;
+}
+
+.upload-file-box .upload-file-list .upload-file-list-item .del {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.15035 2.85486C8.95535 2.65986 8.64035 2.65986 8.44535 2.85486L6.00035 5.29486L3.55535 2.84986C3.36035 2.65486 3.04535 2.65486 2.85035 2.84986C2.65535 3.04486 2.65535 3.35986 2.85035 3.55486L5.29535 5.99986L2.85035 8.44486C2.65535 8.63986 2.65535 8.95486 2.85035 9.14986C3.04535 9.34486 3.36035 9.34486 3.55535 9.14986L6.00035 6.70486L8.44535 9.14986C8.64035 9.34486 8.95535 9.34486 9.15035 9.14986C9.34535 8.95486 9.34535 8.63986 9.15035 8.44486L6.70535 5.99986L9.15035 3.55486C9.34035 3.36486 9.34035 3.04486 9.15035 2.85486Z' fill='%23767676'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+}
+
+.upload-file-box .upload-file-list .upload-file-list-item .name {
+  display: inline-block;
+  position: relative;
+  padding-left: 20px;
+}
+
+.upload-file-box .upload-file-list .upload-file-list-item .name::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 13.5H4C3.72386 13.5 3.5 13.2761 3.5 13V3C3.5 2.72386 3.72386 2.5 4 2.5H8.58579C8.71839 2.5 8.84557 2.55268 8.93934 2.64645L12.3536 6.06066C12.4473 6.15443 12.5 6.2816 12.5 6.41421V13C12.5 13.2761 12.2761 13.5 12 13.5Z' stroke='%23444444'/%3E%3Cpath d='M8 2V6C8 6.55228 8.44772 7 9 7H13' stroke='%23444444'/%3E%3C/svg%3E");
+}
+
+.upload-file-box .upload-file-list .upload-file-list-item .img {
+  display: inline-block;
+  position: relative;
+  width: 100px;
+}
+
+.upload-file-box .upload-file-list .upload-file-list-item .img img {
+  width: 100%;
+}
+
+.num-counter {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 150px;
+  border: 1px solid #d2d2d2;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.num-counter-plus,
+.num-counter-minus {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.num-counter-plus:hover,
+.num-counter-plus:focus,
+.num-counter-minus:hover,
+.num-counter-minus:focus {
+  background-color: #f2f2f2;
+}
+
+.num-counter-plus {
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect y='5' width='12' height='1.5' rx='0.75' fill='%23464646'/%3E%3Crect x='5' y='12' width='12' height='1.5' rx='0.75' transform='rotate(-90 5 12)' fill='%23464646'/%3E%3C/svg%3E");
+}
+
+.num-counter-minus {
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='2' viewBox='0 0 12 2' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='12' height='1.5' rx='0.75' fill='%23464646'/%3E%3C/svg%3E");
+}
+
+.num-counter-input {
+  width: 86px;
+  height: 32px;
+  line-height: 32px;
+  padding: 0;
+  border-width: 0 1px;
+  border-style: solid;
+  border-color: #d2d2d2;
+  text-align: center;
+}
+
+/*****************************************************************
+  Vue Datepicker
+*****************************************************************/
+.dp__input_wrap::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 16px;
+  height: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M5.5 3C5.22386 3 5 3.22386 5 3.5V4H4C3.44772 4 3 4.44772 3 5V6V7V12C3 12.5523 3.44772 13 4 13H12C12.5523 13 13 12.5523 13 12V7V6V5C13 4.44772 12.5523 4 12 4H11V3.5C11 3.22386 10.7761 3 10.5 3C10.2239 3 10 3.22386 10 3.5V4H6V3.5C6 3.22386 5.77614 3 5.5 3ZM12 6V5H4V6H12ZM4 7V12H12V7H4Z' fill='%23222222'/%3E%3C/svg%3E");
+}
+
+.dp__input_wrap svg {
+  display: none;
+}
+
+.dp__input {
+  height: 32px;
+  padding: 0 0 0 28px;
+  border-color: #d2d2d2;
+  font-size: 12px;
+  color: #444;
+}
+
+.ui-datepicker {
+  width: 100px;
+}
+.ui-datepicker.relative .dp--menu-wrapper {
+  position: initial;
+  margin-top: 10px;
+}
+
+.ui-datepicker .dp__arrow_top {
+  display: none;
+}
+
+.ui-datepicker.ss .dp__input {
+  height: 28px;
+}
+
+.ui-datepicker.ss .dp__input_wrap::before {
+  top: 6px;
+}
+
+.ui-datepicker-range {
+  display: flex;
+  align-items: center;
+}
+
+.ui-datepicker-range .custom-select {
+  margin-left: 8px;
+}
+
+/*****************************************************************
+  etc
+*****************************************************************/
+.ui-div-form {
+  display: inline-block;
+  padding: 0 20px;
+}
+
+.ui-coupler {
+  display: inline-block;
+  padding: 0 6px;
+}
+
+.ui-unit {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+/*****************************************************************
+  form layout
+*****************************************************************/
+.reg-group {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 578px;
+}
+
+.reg-group.flex-column  {
+  align-items: baseline;
+}
+
+.reg-group.top  {
+  align-items: normal
+}
+
+.reg-group+.reg-group {
+  margin-top: 16px;
+}
+
+.reg-group .reg-item {
+  flex: 1;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.reg-group.inline {
+  width: auto;
+}
+
+.reg-group.inline .reg-item {
+  flex: none;
+}
+
+.reg-item+.reg-item {
+  margin-left: 10px;
+}
+
+.flex-column > .reg-item+.reg-item {
+  margin: 5px 0 0;
+}
+
+.reg-item .custom-select,
+.reg-item .form-control {
+  flex: 1;
+}
+
+.reg-item.sg .custom-select,
+.reg-item.sg .form-control {
+  flex: none;
+}
+
+[class*='abs-item-'] {
+  position: absolute;
+  top: 0;
+}
+
+.abs-item-r {
+  right: 0;
+}
+
+.ui-chips {
+  position: relative;
+  width: 100%;
+  padding: 0 0 5px 5px;
+  border: 1px solid #d2d2d2;
+  border-radius: 5px;
+}
+
+.ui-chips-item {
+  display: inline-block;
+  position: relative;
+  height: 20px;
+  line-height: 22px;
+  margin: 5px 5px 0 0;
+  padding: 0 5px 0 10px;
+  background-color: #ebebeb;
+  border-radius: 3px;
+}
+
+.ui-chips-del {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.15035 2.85486C8.95535 2.65986 8.64035 2.65986 8.44535 2.85486L6.00035 5.29486L3.55535 2.84986C3.36035 2.65486 3.04535 2.65486 2.85035 2.84986C2.65535 3.04486 2.65535 3.35986 2.85035 3.55486L5.29535 5.99986L2.85035 8.44486C2.65535 8.63986 2.65535 8.95486 2.85035 9.14986C3.04535 9.34486 3.36035 9.34486 3.55535 9.14986L6.00035 6.70486L8.44535 9.14986C8.64035 9.34486 8.95535 9.34486 9.15035 9.14986C9.34535 8.95486 9.34535 8.63986 9.15035 8.44486L6.70535 5.99986L9.15035 3.55486C9.34035 3.36486 9.34035 3.04486 9.15035 2.85486Z' fill='%23767676'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  vertical-align: top;
+}

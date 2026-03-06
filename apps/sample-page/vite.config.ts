@@ -14,6 +14,10 @@ export default defineConfig({
         replacement: path.join(dsRoot, 'tokens/index.css'),
       },
       {
+        find: '@starbanking/design-system/legacy-styles',
+        replacement: path.resolve(__dirname, '../../packages/design-system/src/legacy/admin.css'),
+      },
+      {
         find: '@starbanking/design-system',
         replacement: path.join(dsRoot, 'index.ts'),
       },

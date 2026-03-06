@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { Button, Card, Badge, Typography, Input } from '@starbanking/design-system';
+import {
+  Button, Card, Badge, Typography, Input,
+  FileInput, Modal, Select, useToast,
+} from '@starbanking/design-system';
 import styles from './App.module.css';
 
 /* ── Icons (inline SVG) ── */
@@ -60,55 +63,145 @@ function formatAmount(n: number) {
 }
 
 /* ── Sub-views ── */
-type View = 'overview' | 'send' | 'components';
+type View = 'overview' | 'send' | 'components' | 'banner';
+
+const VIEW_CONFIG: Record<View, { label: string; breadcrumb: string[] }> = {
+  overview:   { label: '대시보드',      breadcrumb: ['홈', '대시보드'] },
+  send:       { label: '이체하기',      breadcrumb: ['홈', '금융', '이체하기'] },
+  banner:     { label: '배너등록',      breadcrumb: ['홈', '운영관리', '배너등록'] },
+  components: { label: '디자인 시스템', breadcrumb: ['홈', '디자인 시스템'] },
+};
+
+const MENU = [
+  {
+    id: 'admin',
+    label: '관리자',
+    children: [
+      { id: 'overview'   as View, label: '대시보드' },
+      { id: 'send'       as View, label: '이체하기' },
+      { id: 'banner'     as View, label: '배너등록' },
+      { id: 'components' as View, label: '디자인 시스템' },
+    ],
+  },
+];
+
+const FAVORITES: View[] = ['overview', 'send', 'banner'];
 
 export default function App() {
   const [view, setView] = useState<View>('overview');
+  const [navHidden, setNavHidden] = useState(false);
+  const [openMenus, setOpenMenus] = useState<string[]>(['admin']);
+
+  const toggleMenu = (id: string) =>
+    setOpenMenus(prev => prev.includes(id) ? prev.filter(m => m !== id) : [...prev, id]);
+
+  const { label, breadcrumb } = VIEW_CONFIG[view];
 
   return (
-    <div className={styles.app}>
-      {/* ── Sidebar ── */}
-      <aside className={styles.sidebar}>
-        <div className={styles.logo}>
-          <div className={styles.logoMark}>S</div>
-          <Typography variant="h6" color="default" as="span" className={styles.logoText}>
-            StarBanking
-          </Typography>
-        </div>
+    <div id="App" className={navHidden ? 'nav-hide' : ''}>
+      {/* ── Header ── */}
+      <header id="adminHeader">
+        <h1></h1>
+        <ul className="util">
+          <li><a href="#" className="pw">비밀번호 변경</a></li>
+          <li><a href="#" className="user">김케어</a></li>
+          <li><a href="#" className="session">세션만료 남은시간 <span>00:00:00</span></a></li>
+          <li><a href="#" className="logout">로그아웃</a></li>
+        </ul>
+      </header>
 
-        <nav className={styles.nav}>
-          {(
-            [
-              { id: 'overview',    label: '대시보드' },
-              { id: 'send',        label: '이체하기' },
-              { id: 'components',  label: '디자인 시스템' },
-            ] as { id: View; label: string }[]
-          ).map(({ id, label }) => (
-            <button
-              key={id}
-              className={[styles.navItem, view === id ? styles.navItemActive : ''].join(' ')}
-              onClick={() => setView(id)}
-            >
-              {label}
-            </button>
-          ))}
-        </nav>
+      {/* ── Nav ── */}
+      <nav id="adminNav">
+        <button type="button" className="nav-toggle" onClick={() => setNavHidden(p => !p)}>
+          <span className="offscreen">메뉴숨기기</span>
+        </button>
+        <div className="admin-nav-scroller">
+          {/* 즐겨찾기 */}
+          <div className="admin-fav-wrap">
+            <div className="admin-fav-head">
+              <h2>즐겨찾기</h2>
+              <ul className="admin-fav-util">
+                <li><button type="button" className="admin-fav-util-item reload"><span className="offscreen">새로고침</span></button></li>
+                <li><button type="button" className="admin-fav-util-item setting"><span className="offscreen">즐겨찾기 메뉴 설정</span></button></li>
+              </ul>
+            </div>
+            <div className="admin-fav-list">
+              <ul>
+                {FAVORITES.map(id => (
+                  <li key={id}>
+                    <button type="button" className="admin-fav-item" onClick={() => setView(id)}>
+                      {VIEW_CONFIG[id].label}
+                    </button>
+                    <span className="admin-fav-check active" />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
 
-        <div className={styles.sidebarUser}>
-          <div className={styles.avatar}>KD</div>
-          <div>
-            <Typography variant="label" as="div">김대박</Typography>
-            <Typography variant="caption" as="div" color="muted">★★★ VIP</Typography>
+          {/* 메뉴 */}
+          <div className="admin-menu-wrap">
+            <ul>
+              {MENU.map(({ id, label: menuLabel, children }) => (
+                <li key={id}>
+                  <button
+                    type="button"
+                    className={`admin-menu-item dep1${openMenus.includes(id) ? ' active' : ''}`}
+                    onClick={() => toggleMenu(id)}
+                  >
+                    {menuLabel}
+                  </button>
+                  {openMenus.includes(id) && (
+                    <ul>
+                      {children.map(child => (
+                        <li key={child.id}>
+                          <button
+                            type="button"
+                            className={`admin-menu-item dep2 no-child${view === child.id ? ' active' : ''}`}
+                            onClick={() => setView(child.id)}
+                          >
+                            {child.label}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-      </aside>
+      </nav>
 
-      {/* ── Main ── */}
-      <main className={styles.main}>
-        {view === 'overview' && <OverviewPage />}
-        {view === 'send' && <SendPage />}
-        {view === 'components' && <ComponentsPage />}
-      </main>
+      {/* ── Container ── */}
+      <div id="adminContainer">
+        <div className="contents">
+          <ol className="breadcrumb">
+            {breadcrumb.map((item, i) => (
+              <li key={i} className={`breadcrumb-item${i === breadcrumb.length - 1 ? ' active' : ''}`}>
+                {i === breadcrumb.length - 1
+                  ? <span aria-current="location">{item}</span>
+                  : <a href="#">{item}</a>
+                }
+              </li>
+            ))}
+          </ol>
+          <div className="ui-title-2">
+            <h2>{label}</h2>
+          </div>
+          <section className="s1">
+            {view === 'overview'   && <OverviewPage />}
+            {view === 'send'       && <SendPage />}
+            {view === 'banner'     && <BannerRegisterPage />}
+            {view === 'components' && <ComponentsPage />}
+          </section>
+        </div>
+      </div>
+
+      {/* ── Footer ── */}
+      <footer id="adminFooter">
+        ⓒ2023 KB Ins. All rights Reserved
+      </footer>
     </div>
   );
 }
@@ -401,6 +494,12 @@ function SendPage() {
 /* ────────────────────────────────────────────────────────── */
 function ComponentsPage() {
   const [inputVal, setInputVal] = useState('');
+  const [selectVal, setSelectVal] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalSize, setModalSize] = useState<'sm' | 'md' | 'lg'>('md');
+  const [fileList, setFileList] = useState<File[]>([]);
+  const toast = useToast();
+
   return (
     <div className={styles.page}>
       <header className={styles.pageHeader}>
@@ -489,6 +588,154 @@ function ComponentsPage() {
         </div>
       </section>
 
+      {/* Select */}
+      <section className={styles.section}>
+        <Typography variant="overline" as="div" className={styles.sectionLabel}>Select</Typography>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 'var(--space-4)' }}>
+          <Select
+            label="기본 선택"
+            placeholder="선택하세요"
+            options={[
+              { value: 'option1', label: '옵션 1' },
+              { value: 'option2', label: '옵션 2' },
+              { value: 'option3', label: '옵션 3' },
+            ]}
+            value={selectVal}
+            onChange={(e) => setSelectVal(e.target.value)}
+          />
+          <Select
+            label="Small"
+            size="sm"
+            placeholder="선택"
+            options={[{ value: 'a', label: 'Small A' }, { value: 'b', label: 'Small B' }]}
+          />
+          <Select
+            label="Large"
+            size="lg"
+            placeholder="선택"
+            options={[{ value: 'a', label: 'Large A' }, { value: 'b', label: 'Large B' }]}
+          />
+          <Select
+            label="오류 상태"
+            placeholder="선택하세요"
+            error
+            errorText="항목을 선택해주세요."
+            options={[{ value: 'a', label: '옵션 A' }]}
+          />
+          <Select
+            label="도움말"
+            placeholder="선택"
+            helperText="하나를 선택해주세요."
+            options={[{ value: 'a', label: '옵션 A' }, { value: 'b', label: '옵션 B' }]}
+          />
+          <Select
+            label="비활성화"
+            placeholder="선택 불가"
+            disabled
+            options={[{ value: 'a', label: '옵션 A' }]}
+          />
+        </div>
+      </section>
+
+      {/* FileInput */}
+      <section className={styles.section}>
+        <Typography variant="overline" as="div" className={styles.sectionLabel}>FileInput</Typography>
+        <div className="stack gap-4" style={{ maxWidth: 520 }}>
+          <FileInput
+            label="기본 파일 업로드"
+            helperText="모든 파일 형식 허용"
+            onChange={setFileList}
+          />
+          <FileInput
+            label="이미지 전용"
+            accept=".jpg,.jpeg,.png,.webp"
+            maxSize={5 * 1024 * 1024}
+            helperText="JPG, PNG, WEBP · 최대 5MB"
+            onChange={setFileList}
+          />
+          {fileList.length > 0 && (
+            <Typography variant="caption" color="muted">
+              선택된 파일: {fileList.map((f) => f.name).join(', ')}
+            </Typography>
+          )}
+          <FileInput label="비활성화" disabled onChange={() => {}} />
+        </div>
+      </section>
+
+      {/* Modal */}
+      <section className={styles.section}>
+        <Typography variant="overline" as="div" className={styles.sectionLabel}>Modal</Typography>
+        <div className="row gap-2">
+          {(['sm', 'md', 'lg'] as const).map((size) => (
+            <Button
+              key={size}
+              variant="outline"
+              onClick={() => { setModalSize(size); setModalOpen(true); }}
+            >
+              {size.toUpperCase()} 모달 열기
+            </Button>
+          ))}
+        </div>
+        <Modal
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
+          title={`${modalSize.toUpperCase()} 모달`}
+          size={modalSize}
+          footer={
+            <div className="row gap-2">
+              <Button variant="outline" onClick={() => setModalOpen(false)}>취소</Button>
+              <Button onClick={() => setModalOpen(false)}>확인</Button>
+            </div>
+          }
+        >
+          <div className="stack gap-3">
+            <Typography variant="body2">
+              모달 컴포넌트입니다. 사이즈는 sm / md / lg 를 지원합니다.
+            </Typography>
+            <Input label="모달 내부 입력" placeholder="텍스트 입력" />
+            <Select
+              label="모달 내부 선택"
+              placeholder="선택하세요"
+              options={[
+                { value: '1', label: '옵션 1' },
+                { value: '2', label: '옵션 2' },
+              ]}
+            />
+          </div>
+        </Modal>
+      </section>
+
+      {/* Toast */}
+      <section className={styles.section}>
+        <Typography variant="overline" as="div" className={styles.sectionLabel}>Toast</Typography>
+        <div className="row gap-2" style={{ flexWrap: 'wrap' }}>
+          <Button
+            variant="primary"
+            onClick={() => toast.success('성공!', { message: '작업이 성공적으로 완료되었습니다.' })}
+          >
+            Success Toast
+          </Button>
+          <Button
+            variant="danger"
+            onClick={() => toast.error('오류 발생', { message: '처리 중 문제가 발생했습니다.' })}
+          >
+            Error Toast
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => toast.warning('주의', { message: '이 작업은 되돌릴 수 없습니다.' })}
+          >
+            Warning Toast
+          </Button>
+          <Button
+            variant="ghost"
+            onClick={() => toast.info('안내', { message: '새로운 업데이트가 있습니다.' })}
+          >
+            Info Toast
+          </Button>
+        </div>
+      </section>
+
       {/* Cards */}
       <section className={styles.section}>
         <Typography variant="overline" as="div" className={styles.sectionLabel}>Card</Typography>
@@ -541,26 +788,57 @@ function ComponentsPage() {
         <Typography variant="overline" as="div" className={styles.sectionLabel}>Color Tokens</Typography>
         <div className="stack gap-4">
           {[
-            { label: 'Primary', shades: ['50','100','200','300','400','500','600','700','800','900'], prefix: 'primary' },
-            { label: 'Secondary', shades: ['50','100','200','300','400','500','600','700','800','900'], prefix: 'secondary' },
-            { label: 'Neutral', shades: ['50','100','200','300','400','500','600','700','800','900'], prefix: 'neutral' },
-          ].map(({ label, shades, prefix }) => (
+            {
+              label: 'Brand / UI',
+              colors: [
+                { name: 'Nav / Primary', value: '#253349' },
+                { name: 'Secondary (Button)', value: '#ffcc00' },
+                { name: 'Highlight', value: '#ffbc00' },
+                { name: 'Badge Yellow', value: '#fed700' },
+              ],
+            },
+            {
+              label: 'Semantic',
+              colors: [
+                { name: 'Point / Link', value: '#287eff' },
+                { name: 'Error / Danger', value: '#ff3232' },
+                { name: 'Hover bg', value: '#f2f2f2' },
+                { name: 'Base bg', value: '#f7f7f7' },
+              ],
+            },
+            {
+              label: 'Text',
+              colors: [
+                { name: 'Strong text', value: '#222' },
+                { name: 'Base text', value: '#444' },
+                { name: 'Muted text', value: '#767676' },
+                { name: 'Placeholder', value: '#999' },
+                { name: 'Disabled text', value: '#ababab' },
+              ],
+            },
+            {
+              label: 'Border / Line',
+              colors: [
+                { name: 'Base border', value: '#d2d2d2' },
+                { name: 'Light border', value: '#ebebeb' },
+              ],
+            },
+          ].map(({ label, colors }) => (
             <div key={label}>
-              <Typography variant="caption" color="muted" as="div" style={{ marginBottom: 'var(--space-2)' }}>{label}</Typography>
-              <div className="row" style={{ gap: 4 }}>
-                {shades.map((shade) => (
-                  <div key={shade} style={{ flex: 1, minWidth: 0 }}>
+              <Typography variant="caption" color="muted" as="div" style={{ marginBottom: 8 }}>{label}</Typography>
+              <div className="row" style={{ gap: 8, flexWrap: 'wrap' }}>
+                {colors.map(({ name, value }) => (
+                  <div key={name} style={{ minWidth: 100, flex: '0 0 auto' }}>
                     <div
                       style={{
                         height: 40,
-                        borderRadius: 'var(--radius-sm)',
-                        backgroundColor: `var(--color-${prefix}-${shade})`,
-                        border: '1px solid rgba(0,0,0,0.06)',
+                        borderRadius: 3,
+                        backgroundColor: value,
+                        border: '1px solid rgba(0,0,0,0.08)',
                       }}
                     />
-                    <Typography variant="caption" color="muted" as="div" style={{ textAlign: 'center', marginTop: 4 }}>
-                      {shade}
-                    </Typography>
+                    <div style={{ fontSize: 11, color: '#444', marginTop: 4, lineHeight: 1.4 }}>{name}</div>
+                    <div style={{ fontSize: 11, color: '#767676', fontFamily: 'monospace' }}>{value}</div>
                   </div>
                 ))}
               </div>
@@ -568,6 +846,275 @@ function ComponentsPage() {
           ))}
         </div>
       </section>
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────────────────── */
+/* Banner Register                                            */
+/* ────────────────────────────────────────────────────────── */
+const POSITION_OPTIONS = [
+  { value: 'main-top',    label: '메인 상단' },
+  { value: 'main-bottom', label: '메인 하단' },
+  { value: 'sidebar',     label: '사이드바' },
+  { value: 'popup',       label: '팝업' },
+];
+
+const STATUS_OPTIONS = [
+  { value: 'active',   label: '활성' },
+  { value: 'inactive', label: '비활성' },
+  { value: 'reserved', label: '예약' },
+];
+
+const statusVariantMap: Record<string, 'success' | 'neutral' | 'warning'> = {
+  active:   'success',
+  inactive: 'neutral',
+  reserved: 'warning',
+};
+const statusLabelMap: Record<string, string> = {
+  active: '활성', inactive: '비활성', reserved: '예약',
+};
+
+interface BannerForm {
+  title: string;
+  linkUrl: string;
+  position: string;
+  status: string;
+  startDate: string;
+  endDate: string;
+}
+
+function BannerRegisterPage() {
+  const toast = useToast();
+  const [form, setForm] = useState<BannerForm>({
+    title: '', linkUrl: '', position: '', status: 'active',
+    startDate: '', endDate: '',
+  });
+  const [errors, setErrors] = useState<Partial<BannerForm>>({});
+  const [files, setFiles] = useState<File[]>([]);
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
+  function set(key: keyof BannerForm, value: string) {
+    setForm((prev) => ({ ...prev, [key]: value }));
+    setErrors((prev) => ({ ...prev, [key]: undefined }));
+  }
+
+  function handleFiles(selected: File[]) {
+    setFiles(selected);
+    if (selected[0]) {
+      const url = URL.createObjectURL(selected[0]);
+      setPreviewUrl(url);
+    } else {
+      setPreviewUrl(null);
+    }
+  }
+
+  function validate() {
+    const e: Partial<BannerForm> = {};
+    if (!form.title)     e.title    = '배너명을 입력해주세요.';
+    if (!form.linkUrl)   e.linkUrl  = '링크 URL을 입력해주세요.';
+    if (!form.position)  e.position = '노출 위치를 선택해주세요.';
+    if (!form.startDate) e.startDate = '시작일을 선택해주세요.';
+    if (!form.endDate)   e.endDate   = '종료일을 선택해주세요.';
+    if (form.startDate && form.endDate && form.startDate > form.endDate)
+      e.endDate = '종료일은 시작일 이후여야 합니다.';
+    if (files.length === 0) e.title = e.title ?? ''; // 이미지 없으면 별도 처리
+    return e;
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (files.length === 0) {
+      toast.error('배너 이미지를 업로드해주세요.');
+      return;
+    }
+    const errs = validate();
+    if (Object.keys(errs).length) { setErrors(errs); return; }
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      toast.success('배너가 등록되었습니다.', { message: `"${form.title}" 배너가 성공적으로 등록되었습니다.` });
+      setForm({ title: '', linkUrl: '', position: '', status: 'active', startDate: '', endDate: '' });
+      setFiles([]);
+      setPreviewUrl(null);
+    }, 1200);
+  }
+
+  return (
+    <div className={styles.page}>
+      <header className={styles.pageHeader}>
+        <div>
+          <Typography variant="h3">배너등록</Typography>
+          <Typography variant="body2" color="muted">새 배너를 등록하고 노출 설정을 관리합니다.</Typography>
+        </div>
+        <Badge variant={statusVariantMap[form.status] ?? 'neutral'} dot>
+          {statusLabelMap[form.status] ?? ''}
+        </Badge>
+      </header>
+
+      <form onSubmit={handleSubmit} noValidate>
+        <div className={styles.bannerLayout}>
+          {/* 왼쪽: 기본 정보 */}
+          <div className={styles.bannerMain}>
+            <Card variant="raised" size="lg">
+              <Typography variant="overline" as="div" className={styles.sectionLabel}>기본 정보</Typography>
+              <div className="stack gap-4">
+                <Input
+                  label="배너명"
+                  placeholder="배너 이름을 입력하세요"
+                  value={form.title}
+                  onChange={(e) => set('title', e.target.value)}
+                  error={!!errors.title}
+                  errorText={errors.title}
+                  required
+                />
+                <Input
+                  label="링크 URL"
+                  placeholder="https://example.com"
+                  value={form.linkUrl}
+                  onChange={(e) => set('linkUrl', e.target.value)}
+                  error={!!errors.linkUrl}
+                  errorText={errors.linkUrl}
+                  required
+                />
+                <Select
+                  label="노출 위치"
+                  options={POSITION_OPTIONS}
+                  placeholder="위치를 선택하세요"
+                  value={form.position}
+                  onChange={(e) => set('position', e.target.value)}
+                  error={!!errors.position}
+                  errorText={errors.position}
+                  required
+                />
+                <Select
+                  label="배너 상태"
+                  options={STATUS_OPTIONS}
+                  value={form.status}
+                  onChange={(e) => set('status', e.target.value)}
+                />
+                <div className="grid-2">
+                  <Input
+                    label="노출 시작일"
+                    type="date"
+                    value={form.startDate}
+                    onChange={(e) => set('startDate', e.target.value)}
+                    error={!!errors.startDate}
+                    errorText={errors.startDate}
+                    required
+                  />
+                  <Input
+                    label="노출 종료일"
+                    type="date"
+                    value={form.endDate}
+                    onChange={(e) => set('endDate', e.target.value)}
+                    error={!!errors.endDate}
+                    errorText={errors.endDate}
+                    required
+                  />
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* 오른쪽: 이미지 업로드 */}
+          <div className={styles.bannerSide}>
+            <Card variant="raised" size="lg">
+              <Typography variant="overline" as="div" className={styles.sectionLabel}>배너 이미지</Typography>
+              <FileInput
+                label="이미지 업로드"
+                accept=".jpg,.jpeg,.png,.webp"
+                maxSize={5 * 1024 * 1024}
+                helperText="JPG, PNG, WEBP · 최대 5MB"
+                onChange={handleFiles}
+                required
+              />
+              {previewUrl && (
+                <div className={styles.bannerThumb}>
+                  <img src={previewUrl} alt="배너 미리보기" className={styles.bannerThumbImg} />
+                </div>
+              )}
+            </Card>
+          </div>
+        </div>
+
+        {/* 하단 버튼 */}
+        <div className={styles.bannerActions}>
+          <Button
+            variant="outline"
+            type="button"
+            onClick={() => setPreviewOpen(true)}
+            disabled={!form.title && !previewUrl}
+          >
+            미리보기
+          </Button>
+          <div className="row gap-2">
+            <Button
+              variant="ghost"
+              type="button"
+              onClick={() => {
+                setForm({ title: '', linkUrl: '', position: '', status: 'active', startDate: '', endDate: '' });
+                setFiles([]);
+                setPreviewUrl(null);
+                setErrors({});
+              }}
+            >
+              초기화
+            </Button>
+            <Button type="submit" loading={loading}>
+              배너 등록
+            </Button>
+          </div>
+        </div>
+      </form>
+
+      {/* 미리보기 모달 */}
+      <Modal
+        open={previewOpen}
+        onClose={() => setPreviewOpen(false)}
+        title="배너 미리보기"
+        size="md"
+        footer={
+          <Button variant="outline" onClick={() => setPreviewOpen(false)}>닫기</Button>
+        }
+      >
+        <div className={styles.bannerPreview}>
+          {previewUrl
+            ? <img src={previewUrl} alt="배너" className={styles.bannerPreviewImg} />
+            : <div className={styles.bannerPreviewEmpty}><Typography variant="body2" color="muted">이미지 없음</Typography></div>
+          }
+          <div className="stack gap-2" style={{ marginTop: 'var(--space-4)' }}>
+            <div className="row gap-2">
+              <Typography variant="caption" color="muted" style={{ width: 72, flexShrink: 0 }}>배너명</Typography>
+              <Typography variant="label">{form.title || '—'}</Typography>
+            </div>
+            <div className="row gap-2">
+              <Typography variant="caption" color="muted" style={{ width: 72, flexShrink: 0 }}>링크</Typography>
+              <Typography variant="label">{form.linkUrl || '—'}</Typography>
+            </div>
+            <div className="row gap-2">
+              <Typography variant="caption" color="muted" style={{ width: 72, flexShrink: 0 }}>위치</Typography>
+              <Typography variant="label">
+                {POSITION_OPTIONS.find((o) => o.value === form.position)?.label || '—'}
+              </Typography>
+            </div>
+            <div className="row gap-2">
+              <Typography variant="caption" color="muted" style={{ width: 72, flexShrink: 0 }}>기간</Typography>
+              <Typography variant="label">
+                {form.startDate && form.endDate ? `${form.startDate} ~ ${form.endDate}` : '—'}
+              </Typography>
+            </div>
+            <div className="row gap-2">
+              <Typography variant="caption" color="muted" style={{ width: 72, flexShrink: 0 }}>상태</Typography>
+              <Badge variant={statusVariantMap[form.status] ?? 'neutral'} size="sm" dot>
+                {statusLabelMap[form.status]}
+              </Badge>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }
