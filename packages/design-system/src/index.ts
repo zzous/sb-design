@@ -12,3 +12,12 @@ export type { BadgeProps, BadgeVariant, BadgeSize } from './components/Badge';
 
 export { Typography } from './components/Typography';
 export type { TypographyProps, TypographyVariant, TypographyColor } from './components/Typography';
+
+export { FileInput } from './components/FileInput';
+export type { FileInputProps } from './components/FileInput';
+
+export { Modal } from './components/Modal';
+export type { ModalProps, ModalSize, ModalFooterAlign } from './components/Modal';
+
+export { ToastProvider, useToast } from './components/Toast';
+export type { ToastProviderProps, ToastOptions, ToastItem, ToastVariant, ToastPosition } from './components/Toast';
