@@ -108,6 +108,11 @@
   --transition-normal: 200ms ease;
   --transition-slow:   300ms ease;
 
+  /* ── Brand custom ── */
+  --color-brand-brown:       #766554;
+  --color-brand-brown-light: #a8917b;
+  --color-brand-brown-dark:  #4e4238;
+
   /* ── Legacy variable aliases (maps css/ folder variables to design tokens) ── */
   --base-txt-color:        var(--color-neutral-600);
   --strong-txt-color:      var(--color-neutral-900);

@@ -7,7 +7,7 @@
 
 .table thead th {
   position: relative;
-  background-color: var(--base-bg-color);
+  background-color: #ebebeb;
   border-top: none;
   border-bottom: none;
   font-weight: bold;
@@ -50,7 +50,7 @@
 
 .table.list th {
   padding: 13px 12px 12px;
-  background-color: var(--base-bg-color);
+  background-color: #ebebeb;
   text-align: center;
 }
 
@@ -177,7 +177,7 @@ td.blind {
 
 .table.reg .table.reg thead th {
   padding: 18px 10px 18px 12px;
-  background-color: #f7f7f7;
+  background-color: #ebebeb;
   vertical-align: top;
   font-size: 12px;
   font-weight: bold;
@@ -186,7 +186,7 @@ td.blind {
 
 .table.reg tbody th {
   padding: 18px 10px 10px 20px;
-  background-color: #f7f7f7;
+  background-color: #ebebeb;
   vertical-align: top;
   font-size: 12px;
   font-weight: bold;
@@ -443,7 +443,7 @@ td.blind {
 .tbl-wrap .ag-header {
   border-top: 2px solid #355d9c;
   border-bottom: none;
-  background-color: #f7f7f7;
+  background-color: #ebebeb;
   border-radius: 2px 2px 0 0;
   overflow: hidden;
 }
@@ -792,7 +792,7 @@ td.blind {
   margin-top: 10px;
   padding: 15px;
   border: 1px solid #d2d2d2;
-  background-color: #f7f7f7;
+  background-color: #ebebeb;
   border-radius: 4px;
 }
 

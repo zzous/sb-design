@@ -4,6 +4,7 @@ import {
   FileInput, Modal, Select, useToast,
 } from '@starbanking/design-system';
 import styles from './App.module.css';
+import EventRegisterPage from './EventRegisterPage';
 
 /* ── Icons (inline SVG) ── */
 const IconArrowUp = () => (
@@ -38,38 +39,46 @@ const IconDownload = () => (
   </svg>
 );
 
-/* ── Data ── */
-const transactions = [
-  { id: 1, name: '스타벅스 강남점',      date: '2026-03-05', amount: -6800,  category: '식음료',   status: 'success' as const },
-  { id: 2, name: '급여 입금',             date: '2026-03-04', amount: 3200000, category: '급여',    status: 'success' as const },
-  { id: 3, name: '넷플릭스',              date: '2026-03-03', amount: -17000,  category: '구독',    status: 'success' as const },
-  { id: 4, name: 'GS25 편의점',           date: '2026-03-03', amount: -3500,   category: '식음료',  status: 'success' as const },
-  { id: 5, name: '해외 송금 수수료',      date: '2026-03-02', amount: -5000,   category: '수수료',  status: 'warning' as const },
-  { id: 6, name: '한국전력',              date: '2026-03-01', amount: -45200,  category: '공과금',  status: 'success' as const },
-  { id: 7, name: '카카오페이 충전',       date: '2026-02-28', amount: -100000, category: '송금',    status: 'success' as const },
-  { id: 8, name: '프리랜서 정산',         date: '2026-02-27', amount: 500000,  category: '수입',    status: 'pending' as const },
+/* ── Dashboard Data ── */
+const MAU_TREND = [
+  { month: '2025-10', mau: '1,108,420', dau: '36,947', newUser: '28,340', leave: '4,120', total: '4,821,200' },
+  { month: '2025-11', mau: '1,142,880', dau: '38,096', newUser: '31,210', leave: '3,980', total: '4,849,100' },
+  { month: '2025-12', mau: '1,189,340', dau: '39,645', newUser: '35,820', leave: '4,560', total: '4,880,600' },
+  { month: '2026-01', mau: '1,218,700', dau: '40,623', newUser: '30,100', leave: '3,870', total: '4,906,830' },
+  { month: '2026-02', mau: '1,219,850', dau: '41,200', newUser: '29,640', leave: '3,490', total: '4,933,000' },
+  { month: '2026-03', mau: '1,284,520', dau: '42,318', newUser: '11,240', leave: '1,320', total: '4,943,000' },
 ];
 
-const statusBadgeMap = {
-  success: { variant: 'success' as const, label: '완료' },
-  warning: { variant: 'warning' as const, label: '처리중' },
-  pending: { variant: 'neutral' as const, label: '대기' },
-  error:   { variant: 'error'   as const, label: '실패' },
+const TRADE_STATS = [
+  { type: '이체',     count: '2,342,100', amount: '890억',   delta: '+9.2%',  up: true  },
+  { type: '결제',     count: '1,200,340', amount: '230억',   delta: '+7.8%',  up: true  },
+  { type: '충전',     count: '299,750',   amount: '80억',    delta: '-2.1%',  up: false },
+  { type: '합계',     count: '3,842,190', amount: '1,200억', delta: '+8.7%',  up: true  },
+];
+
+const RECENT_EVENTS = [
+  { name: '3월 출석체크 이벤트',    type: '출석',  period: '2026-03-01 ~ 2026-03-31', participants: '184,320', status: 'active'   as const },
+  { name: '봄맞이 럭키드로우',       type: '룰렛',  period: '2026-03-10 ~ 2026-03-20', participants: '42,810',  status: 'active'   as const },
+  { name: '금융 퀴즈 왕',            type: '퀴즈',  period: '2026-03-05 ~ 2026-03-15', participants: '98,440',  status: 'active'   as const },
+  { name: '신규 가입 환영 이벤트',   type: '일반',  period: '2026-02-01 ~ 2026-02-28', participants: '211,500', status: 'ended'    as const },
+  { name: '설날 세배돈 이벤트',      type: '룰렛',  period: '2026-01-20 ~ 2026-02-05', participants: '320,980', status: 'ended'    as const },
+];
+
+const EVT_STATUS_MAP = {
+  active:  { variant: 'success' as const, label: '진행중' },
+  ended:   { variant: 'neutral' as const, label: '종료' },
+  pending: { variant: 'warning' as const, label: '예정' },
 };
 
-function formatAmount(n: number) {
-  const abs = Math.abs(n).toLocaleString('ko-KR');
-  return n >= 0 ? `+${abs}원` : `-${abs}원`;
-}
-
 /* ── Sub-views ── */
-type View = 'overview' | 'send' | 'components' | 'banner';
+type View = 'overview' | 'send' | 'components' | 'banner' | 'event-register';
 
 const VIEW_CONFIG: Record<View, { label: string; breadcrumb: string[] }> = {
-  overview:   { label: '대시보드',      breadcrumb: ['홈', '대시보드'] },
-  send:       { label: '이체하기',      breadcrumb: ['홈', '금융', '이체하기'] },
-  banner:     { label: '배너등록',      breadcrumb: ['홈', '운영관리', '배너등록'] },
-  components: { label: '디자인 시스템', breadcrumb: ['홈', '디자인 시스템'] },
+  overview:        { label: '대시보드',      breadcrumb: ['홈', '대시보드'] },
+  send:            { label: '이체하기',      breadcrumb: ['홈', '금융', '이체하기'] },
+  banner:          { label: '배너등록',      breadcrumb: ['홈', '운영관리', '배너등록'] },
+  components:      { label: '디자인 시스템', breadcrumb: ['홈', '디자인 시스템'] },
+  'event-register':{ label: '이벤트 등록',  breadcrumb: ['홈', '이벤트 관리', '이벤트 등록'] },
 };
 
 const MENU = [
@@ -77,15 +86,16 @@ const MENU = [
     id: 'admin',
     label: '관리자',
     children: [
-      { id: 'overview'   as View, label: '대시보드' },
-      { id: 'send'       as View, label: '이체하기' },
-      { id: 'banner'     as View, label: '배너등록' },
-      { id: 'components' as View, label: '디자인 시스템' },
+      { id: 'overview'        as View, label: '대시보드' },
+      { id: 'send'            as View, label: '이체하기' },
+      { id: 'banner'          as View, label: '배너등록' },
+      { id: 'event-register'  as View, label: '이벤트 등록' },
+      { id: 'components'      as View, label: '디자인 시스템' },
     ],
   },
 ];
 
-const FAVORITES: View[] = ['overview', 'send', 'banner'];
+const FAVORITES: View[] = ['overview', 'send', 'event-register'];
 
 export default function App() {
   const [view, setView] = useState<View>('overview');
@@ -192,8 +202,9 @@ export default function App() {
           <section className="s1">
             {view === 'overview'   && <OverviewPage />}
             {view === 'send'       && <SendPage />}
-            {view === 'banner'     && <BannerRegisterPage />}
-            {view === 'components' && <ComponentsPage />}
+            {view === 'banner'          && <BannerRegisterPage />}
+            {view === 'event-register'  && <EventRegisterPage />}
+            {view === 'components'      && <ComponentsPage />}
           </section>
         </div>
       </div>
@@ -210,111 +221,151 @@ export default function App() {
 /* Overview                                                   */
 /* ────────────────────────────────────────────────────────── */
 function OverviewPage() {
+  const today = MAU_TREND[MAU_TREND.length - 1];
+
   return (
     <div className={styles.page}>
       <header className={styles.pageHeader}>
         <div>
-          <Typography variant="h3">안녕하세요, 김대박님 👋</Typography>
-          <Typography variant="body2" color="muted">2026년 3월 5일 (목)</Typography>
+          <Typography variant="h3">서비스 현황 대시보드</Typography>
+          <Typography variant="body2" color="muted">기준일: 2026년 3월 11일</Typography>
         </div>
-        <div className="row gap-2">
-          <Button variant="outline" size="sm" leftIcon={<IconDownload />}>내역 다운로드</Button>
-          <Button size="sm" leftIcon={<IconPlus />}>새 계좌 추가</Button>
-        </div>
+        <Button variant="outline" size="sm" leftIcon={<IconDownload />}>리포트 다운로드</Button>
       </header>
 
-      {/* Summary Cards */}
+      {/* ── KPI Cards ── */}
       <div className={styles.summaryGrid}>
-        <SummaryCard
-          label="총 잔액"
-          value="12,450,830원"
-          delta="+3.2%"
-          deltaPositive
-          sub="전월 대비"
-        />
-        <SummaryCard
-          label="이번달 지출"
-          value="487,500원"
-          delta="+12.1%"
-          deltaPositive={false}
-          sub="전월 대비"
-        />
-        <SummaryCard
-          label="이번달 수입"
-          value="3,700,000원"
-          delta="+0%"
-          deltaPositive
-          sub="전월 대비"
-        />
-        <SummaryCard
-          label="대기 중 거래"
-          value="1건"
-          delta=""
-          deltaPositive
-          sub="처리 예정"
-          badge={<Badge variant="warning" dot>확인 필요</Badge>}
-        />
+        <SummaryCard label="MAU (월간 활성 이용자)" value={`${today.mau}명`} delta="+5.3%" deltaPositive sub="전월 대비" />
+        <SummaryCard label="DAU (일간 활성 이용자)" value={`${today.dau}명`} delta="+2.7%" deltaPositive sub="전일 대비" />
+        <SummaryCard label="이번달 거래 건수" value="3,842,190건" delta="+8.7%" deltaPositive sub="전월 대비" />
+        <SummaryCard label="이번달 거래 금액" value="1,200억원" delta="+11.2%" deltaPositive sub="전월 대비" />
       </div>
 
-      {/* Accounts */}
+      {/* ── 이용자 현황 ── */}
       <div className={styles.section}>
-        <Typography variant="overline" as="div" className={styles.sectionLabel}>
-          내 계좌
-        </Typography>
-        <div className={styles.accountGrid}>
-          <AccountCard
-            name="Star 입출금 통장"
-            number="110-123-456789"
-            balance="8,234,200원"
-            color="var(--color-primary-500)"
-          />
-          <AccountCard
-            name="Star 저축 예금"
-            number="222-987-654321"
-            balance="4,216,630원"
-            color="var(--color-secondary-600)"
-          />
-        </div>
-      </div>
-
-      {/* Transactions */}
-      <div className={styles.section}>
-        <Typography variant="overline" as="div" className={styles.sectionLabel}>
-          최근 거래내역
-        </Typography>
+        <Typography variant="overline" as="div" className={styles.sectionLabel}>이용자 현황 (최근 6개월)</Typography>
         <Card variant="raised" size="sm">
-          <div className={styles.txHeader}>
-            <Input
-              placeholder="거래내역 검색"
-              prefix={<IconSearch />}
-              size="sm"
-              style={{ width: 260 }}
-            />
+          <div className="tbl-wrap">
+            <div className="table-list">
+              <table className="table list" style={{ width: '100%' }}>
+                <colgroup>
+                  <col style={{ width: 120 }} />
+                  <col />
+                  <col />
+                  <col />
+                  <col />
+                  <col />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col">기준월</th>
+                    <th scope="col">MAU</th>
+                    <th scope="col">DAU</th>
+                    <th scope="col">신규 가입</th>
+                    <th scope="col">탈퇴</th>
+                    <th scope="col">누적 회원</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {MAU_TREND.map((row, i) => (
+                    <tr key={row.month} style={i === MAU_TREND.length - 1 ? { fontWeight: 'bold', backgroundColor: '#f5f8ff' } : {}}>
+                      <td className="t-center">{row.month}</td>
+                      <td className="t-right">{row.mau}명</td>
+                      <td className="t-right">{row.dau}명</td>
+                      <td className="t-right" style={{ color: 'var(--color-success)' }}>+{row.newUser}명</td>
+                      <td className="t-right" style={{ color: 'var(--color-error)' }}>-{row.leave}명</td>
+                      <td className="t-right">{row.total}명</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div className={styles.txList}>
-            {transactions.map((tx) => {
-              const badge = statusBadgeMap[tx.status];
-              const isIncome = tx.amount > 0;
-              return (
-                <div key={tx.id} className={styles.txRow}>
-                  <div className={[styles.txIcon, isIncome ? styles.txIconIn : styles.txIconOut].join(' ')}>
-                    {isIncome ? <IconArrowDown /> : <IconArrowUp />}
-                  </div>
-                  <div className={styles.txInfo}>
-                    <Typography variant="label" as="div" className="truncate">{tx.name}</Typography>
-                    <Typography variant="caption" color="muted">{tx.date} · {tx.category}</Typography>
-                  </div>
-                  <Badge variant={badge.variant} size="sm">{badge.label}</Badge>
-                  <Typography
-                    variant="label"
-                    color={isIncome ? 'success' : 'default'}
-                    className={styles.txAmount}
-                  >
-                    {formatAmount(tx.amount)}
-                  </Typography>
-                </div>
-              );
-            })}
+        </Card>
+      </div>
+
+      {/* ── 주요 거래 지표 ── */}
+      <div className={styles.section}>
+        <Typography variant="overline" as="div" className={styles.sectionLabel}>주요 거래 지표 (2026년 3월)</Typography>
+        <Card variant="raised" size="sm">
+          <div className="tbl-wrap">
+            <div className="table-list">
+              <table className="table list" style={{ width: '100%' }}>
+                <colgroup>
+                  <col style={{ width: 120 }} />
+                  <col />
+                  <col />
+                  <col style={{ width: 140 }} />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col">거래 유형</th>
+                    <th scope="col">거래 건수</th>
+                    <th scope="col">거래 금액</th>
+                    <th scope="col">전월 대비</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {TRADE_STATS.map(row => (
+                    <tr key={row.type} style={row.type === '합계' ? { fontWeight: 'bold', backgroundColor: '#f5f8ff' } : {}}>
+                      <td className="t-center">{row.type}</td>
+                      <td className="t-right">{row.count}건</td>
+                      <td className="t-right">{row.amount}</td>
+                      <td className="t-center">
+                        <span style={{ color: row.up ? 'var(--color-success)' : 'var(--color-error)', display: 'inline-flex', alignItems: 'center', gap: 2 }}>
+                          {row.up ? <IconArrowUp /> : <IconArrowDown />}{row.delta}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      {/* ── 최근 이벤트 현황 ── */}
+      <div className={styles.section}>
+        <Typography variant="overline" as="div" className={styles.sectionLabel}>최근 이벤트 현황</Typography>
+        <Card variant="raised" size="sm">
+          <div className="tbl-wrap">
+            <div className="table-list">
+              <table className="table list" style={{ width: '100%' }}>
+                <colgroup>
+                  <col />
+                  <col style={{ width: 80 }} />
+                  <col style={{ width: 260 }} />
+                  <col style={{ width: 120 }} />
+                  <col style={{ width: 90 }} />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col">이벤트명</th>
+                    <th scope="col">유형</th>
+                    <th scope="col">이벤트 기간</th>
+                    <th scope="col">참여자 수</th>
+                    <th scope="col">상태</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {RECENT_EVENTS.map((evt, i) => {
+                    const s = EVT_STATUS_MAP[evt.status];
+                    return (
+                      <tr key={i}>
+                        <td style={{ textAlign: 'left' }}>{evt.name}</td>
+                        <td className="t-center">{evt.type}</td>
+                        <td className="t-center">{evt.period}</td>
+                        <td className="t-right">{evt.participants}명</td>
+                        <td className="t-center">
+                          <Badge variant={s.variant} size="sm">{s.label}</Badge>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         </Card>
       </div>
@@ -353,27 +404,6 @@ function SummaryCard({ label, value, delta, deltaPositive, sub, badge }: Summary
   );
 }
 
-interface AccountCardProps {
-  name: string;
-  number: string;
-  balance: string;
-  color: string;
-}
-function AccountCard({ name, number, balance, color }: AccountCardProps) {
-  return (
-    <div className={styles.accountCard} style={{ '--accent': color } as React.CSSProperties}>
-      <div className={styles.accountCardTop}>
-        <Typography variant="label" color="default" as="div">{name}</Typography>
-        <Typography variant="caption" color="muted" as="div">{number}</Typography>
-      </div>
-      <Typography variant="h4" as="div" className={styles.accountBalance}>{balance}</Typography>
-      <div className="row gap-2">
-        <Button variant="outline" size="sm" leftIcon={<IconSend />} style={{ flex: 1 }}>이체</Button>
-        <Button variant="ghost" size="sm" style={{ flex: 1 }}>내역</Button>
-      </div>
-    </div>
-  );
-}
 
 /* ────────────────────────────────────────────────────────── */
 /* Send                                                       */
@@ -819,16 +849,24 @@ function ComponentsPage() {
             {
               label: 'Border / Line',
               colors: [
-                { name: 'Base border', value: '#d2d2d2' },
-                { name: 'Light border', value: '#ebebeb' },
+                { name: 'Base border', value: '#d2d2d2', token: '' },
+                { name: 'Light border', value: '#ebebeb', token: '' },
+              ],
+            },
+            {
+              label: 'Brand Brown (Custom)',
+              colors: [
+                { name: 'Brown Light', value: '#a8917b', token: '--color-brand-brown-light' },
+                { name: 'Brown Base',  value: '#766554', token: '--color-brand-brown' },
+                { name: 'Brown Dark',  value: '#4e4238', token: '--color-brand-brown-dark' },
               ],
             },
           ].map(({ label, colors }) => (
             <div key={label}>
               <Typography variant="caption" color="muted" as="div" style={{ marginBottom: 8 }}>{label}</Typography>
               <div className="row" style={{ gap: 8, flexWrap: 'wrap' }}>
-                {colors.map(({ name, value }) => (
-                  <div key={name} style={{ minWidth: 100, flex: '0 0 auto' }}>
+                {colors.map(({ name, value, token = '' }) => (
+                  <div key={name} style={{ minWidth: 110, flex: '0 0 auto' }}>
                     <div
                       style={{
                         height: 40,
@@ -839,6 +877,7 @@ function ComponentsPage() {
                     />
                     <div style={{ fontSize: 11, color: '#444', marginTop: 4, lineHeight: 1.4 }}>{name}</div>
                     <div style={{ fontSize: 11, color: '#767676', fontFamily: 'monospace' }}>{value}</div>
+                    {token && <div style={{ fontSize: 10, color: '#999', fontFamily: 'monospace' }}>{token}</div>}
                   </div>
                 ))}
               </div>
