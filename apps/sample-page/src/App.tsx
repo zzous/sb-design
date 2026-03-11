@@ -5,16 +5,18 @@ import { ComponentsPage } from './pages/ComponentsPage';
 import { BannerRegisterPage } from './pages/BannerRegisterPage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
 import EventRegisterPage from './pages/event-register/EventRegisterPage';
+import ABTestChartPage from './pages/ABTestChartPage';
 
-type View = 'overview' | 'send' | 'components' | 'banner' | 'event-register' | 'analytics';
+type View = 'overview' | 'send' | 'components' | 'banner' | 'event-register' | 'analytics' | 'ab-chart';
 
 const VIEW_CONFIG: Record<View, { label: string; breadcrumb: string[] }> = {
-  overview:         { label: '대시보드',      breadcrumb: ['홈', '대시보드'] },
-  send:             { label: '이체하기',      breadcrumb: ['홈', '금융', '이체하기'] },
-  banner:           { label: '배너등록',      breadcrumb: ['홈', '운영관리', '배너등록'] },
-  analytics:        { label: '데이터 분석',   breadcrumb: ['홈', '분석', '데이터 분석'] },
-  components:       { label: '디자인 시스템', breadcrumb: ['홈', '디자인 시스템'] },
-  'event-register': { label: '이벤트 등록',  breadcrumb: ['홈', '이벤트 관리', '이벤트 등록'] },
+  overview:         { label: '대시보드',         breadcrumb: ['홈', '대시보드'] },
+  send:             { label: '이체하기',          breadcrumb: ['홈', '금융', '이체하기'] },
+  banner:           { label: '배너등록',          breadcrumb: ['홈', '운영관리', '배너등록'] },
+  analytics:        { label: '데이터 분석',       breadcrumb: ['홈', '분석', '데이터 분석'] },
+  'ab-chart':       { label: '데이터분석(차트)',  breadcrumb: ['홈', '분석', '데이터분석(차트)'] },
+  components:       { label: '디자인 시스템',     breadcrumb: ['홈', '디자인 시스템'] },
+  'event-register': { label: '이벤트 등록',       breadcrumb: ['홈', '이벤트 관리', '이벤트 등록'] },
 };
 
 const MENU = [
@@ -25,6 +27,7 @@ const MENU = [
       { id: 'overview'        as View, label: '대시보드' },
       { id: 'send'            as View, label: '이체하기' },
       { id: 'analytics'       as View, label: '데이터 분석' },
+      { id: 'ab-chart'        as View, label: '데이터분석(차트)' },
       { id: 'banner'          as View, label: '배너등록' },
       { id: 'event-register'  as View, label: '이벤트 등록' },
       { id: 'components'      as View, label: '디자인 시스템' },
@@ -163,6 +166,7 @@ export default function App() {
             {view === 'analytics'       && <AnalyticsPage />}
             {view === 'banner'          && <BannerRegisterPage />}
             {view === 'event-register'  && <EventRegisterPage />}
+            {view === 'ab-chart'        && <ABTestChartPage />}
             {view === 'components'      && <ComponentsPage />}
           </section>
         </div>
