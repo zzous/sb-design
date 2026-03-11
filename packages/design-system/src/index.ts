@@ -24,3 +24,6 @@ export type { ToastProviderProps, ToastOptions, ToastItem, ToastVariant, ToastPo
 
 export { Select } from './components/Select';
 export type { SelectProps, SelectSize, SelectOption } from './components/Select';
+
+export { Icon } from './components/Icon';
+export type { IconProps, IconName, IconSize } from './components/Icon';
