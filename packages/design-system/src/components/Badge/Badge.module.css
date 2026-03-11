@@ -1,4 +1,4 @@
-/* ── Base : .ui-tag ── */
+/* ── Base ── */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -11,7 +11,7 @@
   line-height: 1;
 }
 
-/* ── Sizes : .ui-tag.s / default / .ui-tag.l ── */
+/* ── Sizes ── */
 .sm {
   height: 16px;
   line-height: 16px;
@@ -31,49 +31,42 @@
   font-size: 12px;
 }
 
-/* ── Variants : .ui-tag.bc1/.bc2/.bc3 기반 ── */
-/* primary → bc1 yellow */
+/* ── Variants ── */
 .primary {
   background-color: #fed700;
   color: #000;
 }
 
-/* secondary → dark bordered */
 .secondary {
-  border: 1px solid #464646;
-  background-color: #fff;
-  color: #222;
+  border: 1px solid var(--ds-border-strong);
+  background-color: var(--ds-surface);
+  color: var(--ds-text);
 }
 
-/* success → green */
 .success {
-  background-color: #d1fae5;
-  color: #1d7a57;
+  background-color: var(--ds-badge-success-bg);
+  color: var(--ds-badge-success-text);
 }
 
-/* warning → orange/yellow */
 .warning {
-  background-color: #fff3cd;
-  color: #b85e00;
+  background-color: var(--ds-badge-warning-bg);
+  color: var(--ds-badge-warning-text);
 }
 
-/* error → red */
 .error {
-  background-color: #fee2e2;
-  color: #b91c1c;
+  background-color: var(--ds-badge-error-bg);
+  color: var(--ds-badge-error-text);
 }
 
-/* info → blue */
 .info {
-  background-color: #dbeafe;
-  color: #1e40af;
+  background-color: var(--ds-badge-info-bg);
+  color: var(--ds-badge-info-text);
 }
 
-/* neutral → bc3 gray bordered */
 .neutral {
-  border: 1px solid #d2d2d2;
-  background-color: #fff;
-  color: #444;
+  border: 1px solid var(--ds-border);
+  background-color: var(--ds-surface);
+  color: var(--ds-text-2);
 }
 
 /* ── Dot ── */

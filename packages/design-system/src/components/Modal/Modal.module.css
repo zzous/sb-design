@@ -1,4 +1,4 @@
-/* ── Backdrop : .ui-modal + dimmed ── */
+/* ── Backdrop ── */
 .backdrop {
   display: flex;
   position: fixed;
@@ -9,7 +9,7 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* ── Panel : .ui-modal-wrap ── */
+/* ── Panel ── */
 .panel {
   position: relative;
   display: flex;
@@ -18,7 +18,7 @@
   max-height: calc(100vh - 100px);
   overflow: hidden;
   border-radius: 3px;
-  box-shadow: 0 8px 24px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px 0px rgba(0, 0, 0, 0.3);
   outline: none;
   transition: 0.3s ease-out;
 }
@@ -30,25 +30,25 @@
 .xl  { max-width: 1200px; }
 .full { max-width: calc(100vw - 40px); max-height: calc(100vh - 40px); }
 
-/* ── Header : .ui-modal-head ── */
+/* ── Header ── */
 .header {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #253349;
+  background-color: var(--ds-surface-nav);
   padding: 14px 20px;
   flex-shrink: 0;
 }
 
 .headerText { flex: 1; min-width: 0; }
 
-/* ── Title : .ui-modal-title ── */
+/* ── Title ── */
 .title {
   font-family: var(--font-family-base, sans-serif);
   font-weight: bold;
   font-size: 16px;
-  color: #fff;
+  color: var(--ds-text-on-dark);
   margin: 0;
   line-height: 1.3;
 }
@@ -59,7 +59,7 @@
   margin: 4px 0 0;
 }
 
-/* ── Close button : .ui-modal-close ── */
+/* ── Close button ── */
 .closeBtn {
   position: absolute;
   top: 0;
@@ -74,26 +74,26 @@
 
 .closeBtn > * { display: none; }
 
-/* ── Body : .ui-modal-body ── */
+/* ── Body ── */
 .body {
   flex: 1 1 auto;
   overflow-y: auto;
   padding: 32px 30px 0;
-  background-color: #fff;
+  background-color: var(--ds-surface);
   font-family: var(--font-family-base, sans-serif);
   font-size: 12px;
-  color: #444;
+  color: var(--ds-text-2);
   line-height: 1.6;
 }
 
-/* ── Footer : .ui-modal-footer ── */
+/* ── Footer ── */
 .footer {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
   padding: 20px 30px 30px;
-  background-color: #fff;
+  background-color: var(--ds-surface);
   flex-shrink: 0;
 }
 

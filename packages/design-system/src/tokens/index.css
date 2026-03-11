@@ -124,4 +124,165 @@
   --base-bd-color:         var(--color-neutral-300);
   --bd1-color:             var(--color-neutral-300);
   --bd2-color:             var(--color-neutral-200);
+
+  /* ── Semantic design system tokens (dark-mode aware) ── */
+  --ds-surface:          #ffffff;
+  --ds-surface-hover:    #f2f2f2;
+  --ds-surface-disabled: #f2f2f2;
+  --ds-surface-nav:      #253349;
+  --ds-surface-nav-hover:#464646;
+
+  --ds-text:             #222222;
+  --ds-text-2:           #444444;
+  --ds-text-muted:       #767676;
+  --ds-text-placeholder: #999999;
+  --ds-text-disabled:    #ababab;
+  --ds-text-on-dark:     #ffffff;
+  --ds-text-error:       #ff3232;
+
+  --ds-border:           #d2d2d2;
+  --ds-border-light:     #ebebeb;
+  --ds-border-strong:    #444444;
+  --ds-border-focus:     #999999;
+  --ds-border-error:     #ff3232;
+
+  --ds-danger:           #ff3232;
+  --ds-danger-hover:     #cc0000;
+
+  /* badge variants */
+  --ds-badge-success-bg:    #d1fae5;
+  --ds-badge-success-text:  #1d7a57;
+  --ds-badge-warning-bg:    #fff3cd;
+  --ds-badge-warning-text:  #b85e00;
+  --ds-badge-error-bg:      #fee2e2;
+  --ds-badge-error-text:    #b91c1c;
+  --ds-badge-info-bg:       #dbeafe;
+  --ds-badge-info-text:     #1e40af;
+}
+
+/* ── Dark mode overrides ── */
+/* Applied via data-theme="dark" on <html> (manual toggle) */
+:root[data-theme="dark"] {
+  /* Neutral scale (flipped for dark) */
+  --color-neutral-0:   #1c1f28;
+  --color-neutral-50:  #13151c;
+  --color-neutral-100: #1e2130;
+  --color-neutral-200: #2c3044;
+  --color-neutral-300: #3c4055;
+  --color-neutral-400: #6b6e82;
+  --color-neutral-500: #9295a8;
+  --color-neutral-600: #b8bace;
+  --color-neutral-700: #d0d2e0;
+  --color-neutral-800: #e4e6f2;
+  --color-neutral-900: #f2f3f8;
+
+  /* Semantic status (dark-friendly) */
+  --color-success-light: #0a2e1c;
+  --color-success:       #34d980;
+  --color-success-dark:  #86efac;
+  --color-warning-light: #2e1d00;
+  --color-warning:       #fbbf24;
+  --color-warning-dark:  #fde68a;
+  --color-error-light:   #2e0909;
+  --color-error:         #f87171;
+  --color-error-dark:    #fca5a5;
+  --color-info-light:    #08163a;
+  --color-info:          #60a5fa;
+  --color-info-dark:     #93c5fd;
+
+  /* Semantic ds tokens (dark) */
+  --ds-surface:          #1c1f28;
+  --ds-surface-hover:    #252830;
+  --ds-surface-disabled: #1e2130;
+  --ds-surface-nav:      #121924;
+  --ds-surface-nav-hover:#2a3548;
+
+  --ds-text:             #f0f0f4;
+  --ds-text-2:           #c8cad8;
+  --ds-text-muted:       #8a8d9e;
+  --ds-text-placeholder: #5c5f70;
+  --ds-text-disabled:    #44475a;
+  --ds-text-on-dark:     #f0f0f4;
+  --ds-text-error:       #ff6b6b;
+
+  --ds-border:           #353848;
+  --ds-border-light:     #272a38;
+  --ds-border-strong:    #8a8d9e;
+  --ds-border-focus:     #6b6e82;
+  --ds-border-error:     #ff6b6b;
+
+  --ds-danger:           #ff5252;
+  --ds-danger-hover:     #d32f2f;
+
+  /* badge variants (dark) */
+  --ds-badge-success-bg:    #0a2e1c;
+  --ds-badge-success-text:  #34d980;
+  --ds-badge-warning-bg:    #2e1d00;
+  --ds-badge-warning-text:  #fbbf24;
+  --ds-badge-error-bg:      #2e0909;
+  --ds-badge-error-text:    #f87171;
+  --ds-badge-info-bg:       #08163a;
+  --ds-badge-info-text:     #60a5fa;
+}
+
+/* Applied via OS-level dark preference */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-neutral-0:   #1c1f28;
+    --color-neutral-50:  #13151c;
+    --color-neutral-100: #1e2130;
+    --color-neutral-200: #2c3044;
+    --color-neutral-300: #3c4055;
+    --color-neutral-400: #6b6e82;
+    --color-neutral-500: #9295a8;
+    --color-neutral-600: #b8bace;
+    --color-neutral-700: #d0d2e0;
+    --color-neutral-800: #e4e6f2;
+    --color-neutral-900: #f2f3f8;
+
+    --color-success-light: #0a2e1c;
+    --color-success:       #34d980;
+    --color-success-dark:  #86efac;
+    --color-warning-light: #2e1d00;
+    --color-warning:       #fbbf24;
+    --color-warning-dark:  #fde68a;
+    --color-error-light:   #2e0909;
+    --color-error:         #f87171;
+    --color-error-dark:    #fca5a5;
+    --color-info-light:    #08163a;
+    --color-info:          #60a5fa;
+    --color-info-dark:     #93c5fd;
+
+    --ds-surface:          #1c1f28;
+    --ds-surface-hover:    #252830;
+    --ds-surface-disabled: #1e2130;
+    --ds-surface-nav:      #121924;
+    --ds-surface-nav-hover:#2a3548;
+
+    --ds-text:             #f0f0f4;
+    --ds-text-2:           #c8cad8;
+    --ds-text-muted:       #8a8d9e;
+    --ds-text-placeholder: #5c5f70;
+    --ds-text-disabled:    #44475a;
+    --ds-text-on-dark:     #f0f0f4;
+    --ds-text-error:       #ff6b6b;
+
+    --ds-border:           #353848;
+    --ds-border-light:     #272a38;
+    --ds-border-strong:    #8a8d9e;
+    --ds-border-focus:     #6b6e82;
+    --ds-border-error:     #ff6b6b;
+
+    --ds-danger:           #ff5252;
+    --ds-danger-hover:     #d32f2f;
+
+    --ds-badge-success-bg:    #0a2e1c;
+    --ds-badge-success-text:  #34d980;
+    --ds-badge-warning-bg:    #2e1d00;
+    --ds-badge-warning-text:  #fbbf24;
+    --ds-badge-error-bg:      #2e0909;
+    --ds-badge-error-text:    #f87171;
+    --ds-badge-info-bg:       #08163a;
+    --ds-badge-info-text:     #60a5fa;
+  }
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { OverviewPage } from './pages/OverviewPage';
 import { SendPage } from './pages/SendPage';
 import { ComponentsPage } from './pages/ComponentsPage';
@@ -38,6 +38,16 @@ export default function App() {
   const [view, setView] = useState<View>('overview');
   const [navHidden, setNavHidden] = useState(false);
   const [openMenus, setOpenMenus] = useState<string[]>(['admin']);
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
+    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+  }, [darkMode]);
 
   const toggleMenu = (id: string) =>
     setOpenMenus(prev => prev.includes(id) ? prev.filter(m => m !== id) : [...prev, id]);
@@ -50,6 +60,17 @@ export default function App() {
       <header id="adminHeader">
         <h1></h1>
         <ul className="util">
+          <li>
+            <button
+              type="button"
+              className="theme-toggle"
+              onClick={() => setDarkMode(d => !d)}
+              aria-label={darkMode ? '라이트 모드' : '다크 모드'}
+              title={darkMode ? '라이트 모드로 전환' : '다크 모드로 전환'}
+            >
+              {darkMode ? '☀️' : '🌙'}
+            </button>
+          </li>
           <li><a href="#" className="pw">비밀번호 변경</a></li>
           <li><a href="#" className="user">김케어</a></li>
           <li><a href="#" className="session">세션만료 남은시간 <span>00:00:00</span></a></li>

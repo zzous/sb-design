@@ -7,7 +7,7 @@
   border-width: 1px;
   border-style: solid;
   border-radius: 3px;
-  background-color: #fff;
+  background-color: var(--ds-surface);
   font-family: var(--font-family-base, sans-serif);
   cursor: pointer;
   white-space: nowrap;
@@ -16,63 +16,63 @@
 }
 
 .btn:hover:not(:disabled) {
-  background-color: #f2f2f2;
-  color: #444;
+  background-color: var(--ds-surface-hover);
+  color: var(--ds-text-2);
 }
 
 .btn:disabled {
-  border-color: #ebebeb;
-  color: #ababab;
+  border-color: var(--ds-border-light);
+  color: var(--ds-text-disabled);
   cursor: not-allowed;
 }
 
-/* ── Sizes : .btn-sm / .btn-slm / .btn-sl ── */
+/* ── Sizes ── */
 .sm {
   padding: 0 10px;
   height: 30px;
-  border-color: #444;
+  border-color: var(--ds-border-strong);
   font-weight: bold;
   font-size: 12px;
-  color: #444;
+  color: var(--ds-text-2);
 }
 
 .md {
   padding: 0 10px;
   height: 32px;
-  border-color: #c0c0c0;
+  border-color: var(--ds-border);
   font-size: 12px;
-  color: #444;
+  color: var(--ds-text-2);
 }
 
 .lg {
   min-width: 120px;
   padding: 0 15px;
   height: 40px;
-  border-color: #222;
+  border-color: var(--ds-text);
   font-weight: bold;
   font-size: 14px;
-  color: #222;
+  color: var(--ds-text);
 }
 
 /* ── Variants ── */
-/* primary → .btn.posi (dark navy) */
+/* primary → dark navy */
 .primary {
-  border-color: #253349;
-  background-color: #253349;
-  color: #fff;
+  border-color: var(--ds-surface-nav);
+  background-color: var(--ds-surface-nav);
+  color: var(--ds-text-on-dark);
 }
 .primary:hover:not(:disabled) {
-  background-color: #464646;
-  border-color: #464646;
-  color: #fff;
+  background-color: var(--ds-surface-nav-hover);
+  border-color: var(--ds-surface-nav-hover);
+  color: var(--ds-text-on-dark);
 }
 .primary:disabled {
-  background-color: #ebebeb;
-  border-color: #ebebeb;
-  color: #999;
+  background-color: var(--ds-border-light);
+  border-color: var(--ds-border-light);
+  color: var(--ds-text-placeholder);
 }
 
-/* secondary → yellow #ffcc00 */
+/* secondary → yellow */
 .secondary {
   border-color: #ffcc00;
   background-color: #ffcc00;
@@ -84,36 +84,36 @@
   border-color: #ffed90;
 }
 
-/* outline → white bg, dark border */
+/* outline */
 .outline {
-  background-color: #fff;
-  border-color: #444;
-  color: #444;
+  background-color: var(--ds-surface);
+  border-color: var(--ds-border-strong);
+  color: var(--ds-text-2);
 }
 .outline:hover:not(:disabled) {
-  background-color: #f2f2f2;
+  background-color: var(--ds-surface-hover);
 }
 
-/* ghost → no border */
+/* ghost */
 .ghost {
   border-color: transparent;
   background-color: transparent;
-  color: #444;
+  color: var(--ds-text-2);
 }
 .ghost:hover:not(:disabled) {
-  background-color: #f2f2f2;
+  background-color: var(--ds-surface-hover);
   border-color: transparent;
 }
 
-/* danger → red */
+/* danger */
 .danger {
-  border-color: #ff3232;
-  background-color: #ff3232;
+  border-color: var(--ds-danger);
+  background-color: var(--ds-danger);
   color: #fff;
 }
 .danger:hover:not(:disabled) {
-  background-color: #cc0000;
-  border-color: #cc0000;
+  background-color: var(--ds-danger-hover);
+  border-color: var(--ds-danger-hover);
   color: #fff;
 }
 
