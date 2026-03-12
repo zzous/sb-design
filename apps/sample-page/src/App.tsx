@@ -1,47 +1,121 @@
 import { useState, useEffect } from 'react';
 import { OverviewPage } from './pages/OverviewPage';
-import { SendPage } from './pages/SendPage';
 import { ComponentsPage } from './pages/ComponentsPage';
 import { BannerRegisterPage } from './pages/BannerRegisterPage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
 import EventRegisterPage from './pages/event-register/EventRegisterPage';
 import ABTestChartPage from './pages/ABTestChartPage';
 
-type View = 'overview' | 'send' | 'components' | 'banner' | 'event-register' | 'analytics' | 'ab-chart';
+type View = 'overview' | 'components' | 'banner' | 'event-register' | 'analytics' | 'ab-chart';
 
 const VIEW_CONFIG: Record<View, { label: string; breadcrumb: string[] }> = {
   overview:         { label: '대시보드',         breadcrumb: ['홈', '대시보드'] },
-  send:             { label: '이체하기',          breadcrumb: ['홈', '금융', '이체하기'] },
-  banner:           { label: '배너등록',          breadcrumb: ['홈', '운영관리', '배너등록'] },
-  analytics:        { label: '데이터 분석',       breadcrumb: ['홈', '분석', '데이터 분석'] },
-  'ab-chart':       { label: '데이터분석(차트)',  breadcrumb: ['홈', '분석', '데이터분석(차트)'] },
-  components:       { label: '디자인 시스템',     breadcrumb: ['홈', '디자인 시스템'] },
-  'event-register': { label: '이벤트 등록',       breadcrumb: ['홈', '이벤트 관리', '이벤트 등록'] },
+  banner:           { label: '배너등록',          breadcrumb: ['홈', '운영관리', '배너/이벤트 관리', '배너관리', '배너등록'] },
+  analytics:        { label: '데이터 분석',       breadcrumb: ['홈', '분석', '데이터분석', '분석현황', '데이터 분석'] },
+  'ab-chart':       { label: '데이터분석(차트)',  breadcrumb: ['홈', '분석', '데이터분석', '분석현황', '데이터분석(차트)'] },
+  components:       { label: '디자인 시스템',     breadcrumb: ['홈', '시스템설정', '디자인 시스템', 'UI 컴포넌트', '디자인 시스템'] },
+  'event-register': { label: '이벤트 등록',       breadcrumb: ['홈', '운영관리', '배너/이벤트 관리', '이벤트관리', '이벤트 등록'] },
 };
 
-const MENU = [
+interface MenuLeaf { id: View; label: string }
+interface Menu3    { id: string; label: string; children: MenuLeaf[] }
+interface Menu2    { id: string; label: string; children: Menu3[] }
+interface Menu1    { id: string; label: string; view?: View; children?: Menu2[] }
+
+const MENU: Menu1[] = [
   {
-    id: 'admin',
-    label: '관리자',
+    id: 'home',
+    label: '홈',
+    view: 'overview',
+  },
+  {
+    id: 'operation',
+    label: '운영관리',
     children: [
-      { id: 'overview'        as View, label: '대시보드' },
-      { id: 'send'            as View, label: '이체하기' },
-      { id: 'analytics'       as View, label: '데이터 분석' },
-      { id: 'ab-chart'        as View, label: '데이터분석(차트)' },
-      { id: 'banner'          as View, label: '배너등록' },
-      { id: 'event-register'  as View, label: '이벤트 등록' },
-      { id: 'components'      as View, label: '디자인 시스템' },
+      {
+        id: 'banner-mgmt',
+        label: '배너/이벤트 관리',
+        children: [
+          {
+            id: 'banner-group',
+            label: '배너관리',
+            children: [
+              { id: 'banner', label: '배너등록' },
+            ],
+          },
+          {
+            id: 'event-group',
+            label: '이벤트관리',
+            children: [
+              { id: 'event-register', label: '이벤트 등록' },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'analytics-top',
+    label: '분석',
+    children: [
+      {
+        id: 'data-analytics',
+        label: '데이터분석',
+        children: [
+          {
+            id: 'analytics-group',
+            label: '분석현황',
+            children: [
+              { id: 'analytics', label: '데이터 분석' },
+              { id: 'ab-chart', label: '데이터분석(차트)' },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'system',
+    label: '시스템설정',
+    children: [
+      {
+        id: 'design-sys',
+        label: '디자인 시스템',
+        children: [
+          {
+            id: 'ui-components',
+            label: 'UI 컴포넌트',
+            children: [
+              { id: 'components', label: '디자인 시스템' },
+            ],
+          },
+        ],
+      },
     ],
   },
 ];
 
-const FAVORITES: View[] = ['overview', 'send', 'event-register'];
+const FAVORITES: View[] = ['overview', 'event-register', 'banner'];
+
+function findTopId(v: View): string {
+  for (const item of MENU) {
+    if (item.view === v) return item.id;
+    if (item.children) {
+      for (const dep2 of item.children)
+        for (const dep3 of dep2.children)
+          for (const dep4 of dep3.children)
+            if (dep4.id === v) return item.id;
+    }
+  }
+  return MENU[0].id;
+}
 
 export default function App() {
-  const [view, setView] = useState<View>('overview');
+  const [view, setView]           = useState<View>('overview');
+  const [activeTop, setActiveTop] = useState<string>('home');
   const [navHidden, setNavHidden] = useState(false);
-  const [openMenus, setOpenMenus] = useState<string[]>(['admin']);
-  const [darkMode, setDarkMode] = useState(() => {
+  const [openMenus, setOpenMenus] = useState<string[]>([]);
+  const [darkMode, setDarkMode]   = useState(() => {
     const saved = localStorage.getItem('theme');
     if (saved) return saved === 'dark';
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -55,13 +129,43 @@ export default function App() {
   const toggleMenu = (id: string) =>
     setOpenMenus(prev => prev.includes(id) ? prev.filter(m => m !== id) : [...prev, id]);
 
+  const handleViewChange = (v: View) => {
+    setView(v);
+    setActiveTop(findTopId(v));
+  };
+
+  const handleTopClick = (item: Menu1) => {
+    if (item.view) {
+      handleViewChange(item.view);
+    } else {
+      setActiveTop(item.id);
+    }
+  };
+
   const { label, breadcrumb } = VIEW_CONFIG[view];
+  const activeTopItem = MENU.find(m => m.id === activeTop);
+  const leftMenuItems = activeTopItem?.children ?? [];
 
   return (
     <div id="App" className={navHidden ? 'nav-hide' : ''}>
-      {/* ── Header ── */}
+      {/* ── Header (1depth 포함) ── */}
       <header id="adminHeader">
         <h1></h1>
+        <nav id="adminTopNav">
+          <ul>
+            {MENU.map(item => (
+              <li key={item.id}>
+                <button
+                  type="button"
+                  className={`top-menu-item${activeTop === item.id ? ' active' : ''}`}
+                  onClick={() => handleTopClick(item)}
+                >
+                  {item.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
         <ul className="util">
           <li>
             <button
@@ -81,7 +185,7 @@ export default function App() {
         </ul>
       </header>
 
-      {/* ── Nav ── */}
+      {/* ── Nav (2~4depth) ── */}
       <nav id="adminNav">
         <button type="button" className="nav-toggle" onClick={() => setNavHidden(p => !p)}>
           <span className="offscreen">메뉴숨기기</span>
@@ -100,7 +204,7 @@ export default function App() {
               <ul>
                 {FAVORITES.map(id => (
                   <li key={id}>
-                    <button type="button" className="admin-fav-item" onClick={() => setView(id)}>
+                    <button type="button" className="admin-fav-item" onClick={() => handleViewChange(id)}>
                       {VIEW_CONFIG[id].label}
                     </button>
                     <span className="admin-fav-check active" />
@@ -110,37 +214,54 @@ export default function App() {
             </div>
           </div>
 
-          {/* 메뉴 */}
-          <div className="admin-menu-wrap">
-            <ul>
-              {MENU.map(({ id, label: menuLabel, children }) => (
-                <li key={id}>
-                  <button
-                    type="button"
-                    className={`admin-menu-item dep1${openMenus.includes(id) ? ' active' : ''}`}
-                    onClick={() => toggleMenu(id)}
-                  >
-                    {menuLabel}
-                  </button>
-                  {openMenus.includes(id) && (
-                    <ul>
-                      {children.map(child => (
-                        <li key={child.id}>
-                          <button
-                            type="button"
-                            className={`admin-menu-item dep2 no-child${view === child.id ? ' active' : ''}`}
-                            onClick={() => setView(child.id)}
-                          >
-                            {child.label}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* 2depth ~ 4depth 메뉴 */}
+          {leftMenuItems.length > 0 && (
+            <div className="admin-menu-wrap">
+              <ul>
+                {leftMenuItems.map(dep2 => (
+                  <li key={dep2.id}>
+                    <button
+                      type="button"
+                      className={`admin-menu-item dep2${openMenus.includes(dep2.id) ? ' active' : ''}`}
+                      onClick={() => toggleMenu(dep2.id)}
+                    >
+                      {dep2.label}
+                    </button>
+                    {openMenus.includes(dep2.id) && (
+                      <ul>
+                        {dep2.children.map(dep3 => (
+                          <li key={dep3.id}>
+                            <button
+                              type="button"
+                              className={`admin-menu-item dep3${openMenus.includes(dep3.id) ? ' active' : ''}`}
+                              onClick={() => toggleMenu(dep3.id)}
+                            >
+                              {dep3.label}
+                            </button>
+                            {openMenus.includes(dep3.id) && (
+                              <ul>
+                                {dep3.children.map(dep4 => (
+                                  <li key={dep4.id}>
+                                    <button
+                                      type="button"
+                                      className={`admin-menu-item dep4 no-child${view === dep4.id ? ' active' : ''}`}
+                                      onClick={() => handleViewChange(dep4.id)}
+                                    >
+                                      {dep4.label}
+                                    </button>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -162,7 +283,6 @@ export default function App() {
           </div>
           <section className="s1">
             {view === 'overview'        && <OverviewPage />}
-            {view === 'send'            && <SendPage />}
             {view === 'analytics'       && <AnalyticsPage />}
             {view === 'banner'          && <BannerRegisterPage />}
             {view === 'event-register'  && <EventRegisterPage />}

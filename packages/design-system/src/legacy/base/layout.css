@@ -62,6 +62,44 @@
 }
 
 
+/*****************************************************************
+ top nav (1depth)
+ *****************************************************************/
+#adminTopNav {
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+  padding: 0 10px;
+}
+
+#adminTopNav ul {
+  display: flex;
+  align-items: stretch;
+}
+
+.top-menu-item {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  padding: 0 20px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+  white-space: nowrap;
+  transition: background-color 0.15s;
+}
+
+.top-menu-item:hover,
+.top-menu-item:focus {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.top-menu-item.active {
+  color: #fff;
+  font-weight: bold;
+  box-shadow: inset 0 -3px 0 #fed700;
+}
+
 #adminHeader .util {
   display: flex;
 }
@@ -368,7 +406,7 @@
   background-color: #e4ebf5;
 }
 
-.admin-menu-item:not(.dep3, .window, .no-child)::after {
+.admin-menu-item:not(.dep4, .window, .no-child)::after {
   content: '';
   position: absolute;
   top: 8px;
@@ -380,7 +418,7 @@
   transition: transform .3s ease-out;
 }
 
-.admin-menu-item.active:not(.dep3, .window, .no-child)::after {
+.admin-menu-item.active:not(.dep4, .window, .no-child)::after {
   transform: rotate(0deg);
 }
 
@@ -406,16 +444,18 @@
   background-repeat: no-repeat;
 }
 
-.admin-menu-item.dep1 {
+/* dep1은 상단 탭으로 이동 — 좌측 nav 최상위는 dep2 */
+.admin-menu-item.dep2 {
   font-weight: bold;
 }
 
-.admin-menu-item.dep2 {
+.admin-menu-item.dep3 {
+  padding: 9px 30px 9px 30px;
   font-size: 13px;
 }
 
-.admin-menu-item.dep3 {
-  padding: 4px 50px 4px 30px;
+.admin-menu-item.dep4 {
+  padding: 4px 50px 4px 40px;
   font-size: 13px;
   color: #444;
 }
