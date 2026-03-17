@@ -1,6 +1,0 @@
-{
-  "/page": "app/page.js",
-  "/banner/page": "app/banner/page.js",
-  "/components/page": "app/components/page.js",
-  "/event-register/page": "app/event-register/page.js"
-}
