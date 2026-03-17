@@ -8,11 +8,11 @@ type View = 'overview' | 'components' | 'banner' | 'event-register' | 'analytics
 
 const VIEW_CONFIG: Record<View, { label: string; breadcrumb: string[]; path: string }> = {
   overview:         { label: '대시보드',         path: '/',               breadcrumb: ['홈', '대시보드'] },
-  banner:           { label: '배너등록',          path: '/banner',         breadcrumb: ['홈', '운영관리', '배너/이벤트 관리', '배너관리', '배너등록'] },
+  banner:           { label: '배너등록',          path: '/banner',         breadcrumb: ['홈', '통합관리', '배너/이벤트 관리', '배너관리', '배너등록'] },
   analytics:        { label: '데이터 분석',       path: '/analytics',      breadcrumb: ['홈', '분석', '데이터분석', '분석현황', '데이터 분석'] },
   'ab-chart':       { label: '데이터분석(차트)',  path: '/ab-chart',       breadcrumb: ['홈', '분석', '데이터분석', '분석현황', '데이터분석(차트)'] },
   components:       { label: '디자인 시스템',     path: '/components',     breadcrumb: ['홈', '시스템설정', '디자인 시스템', 'UI 컴포넌트', '디자인 시스템'] },
-  'event-register': { label: '이벤트 등록',       path: '/event-register', breadcrumb: ['홈', '운영관리', '배너/이벤트 관리', '이벤트관리', '이벤트 등록'] },
+  'event-register': { label: '이벤트 등록',       path: '/event-register', breadcrumb: ['홈', '통합관리', '배너/이벤트 관리', '이벤트관리', '이벤트 등록'] },
 };
 
 function pathToView(pathname: string): View {
@@ -29,7 +29,7 @@ interface Menu1    { id: string; label: string; view?: View; children?: Menu2[] 
 const MENU: Menu1[] = [
   { id: 'home', label: '홈', view: 'overview' },
   {
-    id: 'operation', label: '운영관리',
+    id: 'common', label: '통합관리',
     children: [
       {
         id: 'banner-mgmt', label: '배너/이벤트 관리',
@@ -38,26 +38,33 @@ const MENU: Menu1[] = [
           { id: 'event-group', label: '이벤트관리', children: [{ id: 'event-register', label: '이벤트 등록' }] },
         ],
       },
-    ],
-  },
-  {
-    id: 'analytics-top', label: '분석',
-    children: [
       {
-        id: 'data-analytics', label: '데이터분석',
+        id: 'design-sys', label: '디자인 시스템',
         children: [
-          { id: 'analytics-group', label: '분석현황', children: [{ id: 'analytics', label: '데이터 분석' }, { id: 'ab-chart', label: '데이터분석(차트)' }] },
+          { id: 'ui-components', label: 'UI 컴포넌트', children: [{ id: 'components', label: '디자인 시스템' }] },
         ],
       },
     ],
   },
   {
-    id: 'system', label: '시스템설정',
+    id: 'operation', label: '개인',
+    children: [
+      // {
+      //   id: 'banner-mgmt', label: '배너/이벤트 관리',
+      //   children: [
+      //     { id: 'banner-group', label: '배너관리', children: [{ id: 'banner', label: '배너등록' }] },
+      //     { id: 'event-group', label: '이벤트관리', children: [{ id: 'event-register', label: '이벤트 등록' }] },
+      //   ],
+      // },
+    ],
+  },
+  {
+    id: 'analytics-top', label: '기업',
     children: [
       {
-        id: 'design-sys', label: '디자인 시스템',
+        id: 'data-analytics', label: '데이터분석',
         children: [
-          { id: 'ui-components', label: 'UI 컴포넌트', children: [{ id: 'components', label: '디자인 시스템' }] },
+          { id: 'analytics-group', label: '분석현황', children: [{ id: 'analytics', label: '데이터 분석' }, { id: 'ab-chart', label: '데이터분석(차트)' }] },
         ],
       },
     ],
@@ -145,15 +152,10 @@ export default function ClientShell({ children }: { children: React.ReactNode })
           </nav>
           <ul className="util">
             <li>
-              <button
-                type="button"
-                className="theme-toggle"
-                onClick={() => setDarkMode(d => !d)}
-                aria-label={darkMode ? '라이트 모드' : '다크 모드'}
-                title={darkMode ? '라이트 모드로 전환' : '다크 모드로 전환'}
-              >
-                {darkMode ? '☀️' : '🌙'}
-              </button>
+              <a href="#" className="theme-toggle" onClick={() => setDarkMode(d => !d)} aria-label={darkMode ? '라이트 모드' : '다크 모드'} title={darkMode ? '라이트 모드로 전환' : '다크 모드로 전환'}>
+                {darkMode ? '☀️ 다크모드 OFF'  : '🌙 다크모드 ON'}
+              </a>
+              
             </li>
             <li><a href="#" className="pw">비밀번호 변경</a></li>
             <li><a href="#" className="user">김케어</a></li>
@@ -200,6 +202,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
                         className={`admin-menu-item dep2${openMenus.includes(dep2.id) ? ' active' : ''}`}
                         onClick={() => toggleMenu(dep2.id)}
                       >
+                        {dep2.id}
                         {dep2.label}
                       </button>
                       {openMenus.includes(dep2.id) && (
