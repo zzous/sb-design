@@ -21,7 +21,7 @@ function pathToView(pathname: string): View {
   return found ? found[0] : 'overview';
 }
 
-interface MenuLeaf { id: View; label: string }
+interface MenuLeaf { id: string; label: string }
 interface Menu3    { id: string; label: string; children: MenuLeaf[] }
 interface Menu2    { id: string; label: string; children: Menu3[] }
 interface Menu1    { id: string; label: string; view?: View; children?: Menu2[] }
@@ -32,56 +32,53 @@ const MENU: Menu1[] = [
     id: 'common', label: '통합관리',
     children: [
       {
-        id: 'banner-mgmt', label: '배너/이벤트 관리',
+        id: 'common-banner-mgmt', label: '배너/이벤트 관리',
         children: [
-          { id: 'banner-group', label: '배너관리', children: [{ id: 'banner', label: '배너등록' }] },
-          { id: 'event-group', label: '이벤트관리', children: [{ id: 'event-register', label: '이벤트 등록' }] },
+          { id: 'common-banner-group',  label: '배너관리',   children: [{ id: 'banner',         label: '배너등록' }] },
+          { id: 'common-event-group',   label: '이벤트관리', children: [{ id: 'event-register', label: '이벤트 등록' }] },
         ],
       },
       {
-        id: 'design-sys', label: '디자인 시스템',
+        id: 'common-design-sys', label: '디자인 시스템',
         children: [
-          { id: 'ui-components', label: 'UI 컴포넌트', children: [{ id: 'components', label: '디자인 시스템' }] },
+          { id: 'common-ui-components', label: 'UI 컴포넌트', children: [{ id: 'components', label: '디자인 시스템' }] },
         ],
       },
     ],
   },
   {
-    id: 'operation', label: '개인',
+    id: 'indivisual', label: '개인',
     children: [
       {
-        id: 'banner-mgmt1', label: '상품가입/관리',
+        id: 'personal-product-mgmt', label: '상품가입/관리',
         children: [
-          { id: 'banner-group', label: '추천상품', children: [{ id: 'banner', label: '우리 아이 금융상품 만들기' }] },
-          { id: 'event-group', label: '예적금', children: [{ id: 'event-register', label: '이벤트 등록' }] },
-          { id: 'event-group', label: '대출', children: 
-            [
-              { id: 'event-register', label: '대출 상품가입' },
-              { id: 'event-register', label: '신용대출' },
-              { id: 'event-register', label: 'KB부동산담보대출' },
-              { id: 'event-register', label: '전월세보증금대출' },
-              { id: 'event-register', label: '전세보증금반환보증' },
-              { id: 'event-register', label: '예금담보대출' }
-
-          ] },
+          { id: 'personal-recommended', label: '추천상품', children: [{ id: 'banner',         label: '우리 아이 금융상품 만들기' }] },
+          { id: 'personal-savings',     label: '예적금',   children: [{ id: 'event-register', label: '이벤트 등록' }] },
+          { id: 'personal-loan',        label: '대출',     children: [
+            { id: 'loan-product',          label: '대출 상품가입' },
+            { id: 'loan-credit',           label: '신용대출' },
+            { id: 'loan-real-estate',      label: 'KB부동산담보대출' },
+            { id: 'loan-jeonse',           label: '전월세보증금대출' },
+            { id: 'loan-jeonse-guarantee', label: '전세보증금반환보증' },
+            { id: 'loan-savings',          label: '예금담보대출' },
+          ]},
         ],
       },
       {
-        id: 'banner-mgmt2', label: '혜택',
+        id: 'personal-benefits', label: '혜택',
         children: [
-          { id: 'banner-group', label: '이벤트', children: []},
-          { id: 'banner-group', label: '쿠폰함', children: []},
-          { id: 'banner-group', label: '제휴혜택존', children: []},
-          { id: 'banner-group', label: '모바일 쿠폰샵', children: []},
-          { id: 'banner-group', label: '매일포인트 받기 서비스 해지', children: []},
-          { id: 'banner-group', label: '포인트통', children: []},
-          { id: 'banner-group', label: '모아런(More Run)', children: []},
-         
+          { id: 'benefit-event',              label: '이벤트',                      children: [] },
+          { id: 'benefit-coupon',             label: '쿠폰함',                      children: [] },
+          { id: 'benefit-partnership',        label: '제휴혜택존',                  children: [] },
+          { id: 'benefit-mobile-coupon',      label: '모바일 쿠폰샵',               children: [] },
+          { id: 'benefit-daily-point-cancel', label: '매일포인트 받기 서비스 해지', children: [] },
+          { id: 'benefit-point-bin',          label: '포인트통',                    children: [] },
+          { id: 'benefit-moarun',             label: '모아런(More Run)',             children: [] },
         ],
       },
       {
-        id: 'banner-mgmt', label: '생활',
-        children: [ ],
+        id: 'personal-life', label: '생활',
+        children: [],
       },
     ],
   },
@@ -89,28 +86,34 @@ const MENU: Menu1[] = [
     id: 'analytics-top', label: '기업',
     children: [
       {
-        id: 'data-analytics', label: '데이터분석',
+        id: 'analytics-data', label: '데이터분석',
         children: [
-          { id: 'analytics-group', label: '분석현황', children: [{ id: 'analytics', label: '데이터 분석' }, { id: 'ab-chart', label: '데이터분석(차트)' }] },
+          { id: 'analytics-status', label: '분석현황', children: [{ id: 'analytics', label: '데이터 분석' }, { id: 'ab-chart', label: '데이터분석(차트)' }] },
         ],
       },
     ],
   },
 ];
 
-const FAVORITES: View[] = ['overview', 'event-register', 'banner'];
+const FAVORITES: { id: View; shortcut: string }[] = [
+  { id: 'overview',       shortcut: 'Ctrl+1' },
+  { id: 'event-register', shortcut: 'Ctrl+2' },
+  { id: 'banner',         shortcut: 'Ctrl+3' },
+];
+
+function hasLeafView(children: Menu2[], v: View): boolean {
+  return children.some(dep2 =>
+    dep2.children.some(dep3 =>
+      dep3.children.some(dep4 => dep4.id === v)
+    )
+  );
+}
 
 function findTopId(v: View): string {
-  for (const item of MENU) {
-    if (item.view === v) return item.id;
-    if (item.children) {
-      for (const dep2 of item.children)
-        for (const dep3 of dep2.children)
-          for (const dep4 of dep3.children)
-            if (dep4.id === v) return item.id;
-    }
-  }
-  return MENU[0].id;
+  const found = MENU.find(item =>
+    item.view === v || (item.children && hasLeafView(item.children, v))
+  );
+  return found?.id ?? MENU[0].id;
 }
 
 export default function ClientShell({ children }: { children: React.ReactNode }) {
@@ -142,10 +145,27 @@ export default function ClientShell({ children }: { children: React.ReactNode })
     setActiveTop(findTopId(currentView));
   }, [currentView]);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (!e.ctrlKey) return;
+      const idx = parseInt(e.key) - 1;
+      if (idx >= 0 && idx < FAVORITES.length) {
+        e.preventDefault();
+        handleViewChange(FAVORITES[idx].id);
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, []);
+
   const toggleMenu = (id: string) =>
     setOpenMenus(prev => prev.includes(id) ? prev.filter(m => m !== id) : [...prev, id]);
 
   const handleViewChange = (v: View) => router.push(VIEW_CONFIG[v].path);
+
+  const handleLeafClick = (id: string) => {
+    if (id in VIEW_CONFIG) handleViewChange(id as View);
+  };
 
   const handleTopClick = (item: Menu1) => {
     if (item.view) handleViewChange(item.view);
@@ -182,7 +202,6 @@ export default function ClientShell({ children }: { children: React.ReactNode })
               <a href="#" className="theme-toggle" onClick={() => setDarkMode(d => !d)} aria-label={darkMode ? '라이트 모드' : '다크 모드'} title={darkMode ? '라이트 모드로 전환' : '다크 모드로 전환'}>
                 {darkMode ? '☀️ 다크모드 OFF'  : '🌙 다크모드 ON'}
               </a>
-              
             </li>
             <li><a href="#" className="pw">비밀번호 변경</a></li>
             <li><a href="#" className="user">김케어</a></li>
@@ -207,10 +226,11 @@ export default function ClientShell({ children }: { children: React.ReactNode })
               </div>
               <div className="admin-fav-list">
                 <ul>
-                  {FAVORITES.map(id => (
-                    <li key={id}>
-                      <button type="button" className="admin-fav-item" onClick={() => handleViewChange(id)}>
-                        {VIEW_CONFIG[id].label}
+                  {FAVORITES.map(fav => (
+                    <li key={fav.id}>
+                      <button type="button" className="admin-fav-item" onClick={() => handleViewChange(fav.id)}>
+                        {VIEW_CONFIG[fav.id].label}
+                        <span className="admin-fav-shortcut">{fav.shortcut}</span>
                       </button>
                       <span className="admin-fav-check active" />
                     </li>
@@ -222,7 +242,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
             {leftMenuItems.length > 0 && (
               <div className="admin-menu-wrap">
                 <ul>
-                  {leftMenuItems.map(dep2 => (
+                  {leftMenuItems.map((dep2, i2) => (
                     <li key={dep2.id}>
                       <button
                         type="button"
@@ -233,7 +253,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
                       </button>
                       {openMenus.includes(dep2.id) && (
                         <ul>
-                          {dep2.children.map(dep3 => (
+                          {dep2.children.map((dep3, i3) => (
                             <li key={dep3.id}>
                               <button
                                 type="button"
@@ -244,12 +264,12 @@ export default function ClientShell({ children }: { children: React.ReactNode })
                               </button>
                               {openMenus.includes(dep3.id) && (
                                 <ul>
-                                  {dep3.children.map(dep4 => (
-                                    <li key={dep4.id}>
+                                  {dep3.children.map((dep4, i4) => (
+                                    <li key={`${i2}-${i3}-${i4}`}>
                                       <button
                                         type="button"
                                         className={`admin-menu-item dep4 no-child${currentView === dep4.id ? ' active' : ''}`}
-                                        onClick={() => handleViewChange(dep4.id)}
+                                        onClick={() => handleLeafClick(dep4.id)}
                                       >
                                         {dep4.label}
                                       </button>

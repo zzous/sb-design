@@ -79,6 +79,30 @@ body {
   white-space: nowrap;
 }
 
+/* ── Favorite shortcut badge ── */
+.admin-fav-item {
+  display: flex;
+  align-items: center;
+}
+
+.admin-fav-shortcut {
+  margin-left: auto;
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 3px;
+  padding: 1px 5px;
+  letter-spacing: 0.03em;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .admin-fav-shortcut {
+  color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+}
+
 /* ── Admin nav active item ── */
 .admin-menu-item.dep2.active,
 .admin-menu-item.dep3.active {

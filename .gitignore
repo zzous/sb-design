@@ -4,3 +4,7 @@ storybook-static/
 .DS_Store
 *.local
 node_modules
+
+# Next.js
+.next/
+out/
