@@ -4,7 +4,7 @@ import styles from './Card.module.css';
 export type CardVariant = 'flat' | 'raised' | 'sunken';
 export type CardSize = 'sm' | 'md' | 'lg';
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   variant?: CardVariant;
   size?: CardSize;
   title?: React.ReactNode;
