@@ -80,7 +80,7 @@ const MENU: Menu1[] = [
         ],
       },
       {
-        id: 'banner-mgmt3', label: '생활',
+        id: 'banner-mgmt', label: '생활',
         children: [ ],
       },
     ],
