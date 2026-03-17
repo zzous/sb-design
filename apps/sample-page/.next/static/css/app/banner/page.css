@@ -1,0 +1,246 @@
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ../../node_modules/.pnpm/next@15.5.13_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!../../node_modules/.pnpm/next@15.5.13_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./src/App.module.css ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/* ── Page (어드민 container 안에서의 콘텐츠 래퍼) ── */
+.App_page___pGpQ {
+  padding: 20px 0 0;
+}
+
+.App_pageHeader__OISHS {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+/* ── Summary Grid ── */
+.App_summaryGrid__5dj5i {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: var(--space-4);
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.App_summaryValue__Dygi3 {
+  margin: var(--space-1) 0;
+}
+
+/* ── Account Cards ── */
+.App_accountGrid__yKNrO {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: var(--space-4);
+  gap: var(--space-4);
+}
+
+.App_accountCard__c8WCB {
+  background: linear-gradient(135deg, var(--accent, var(--color-primary-500)) 0%, rgba(255,255,255,0) 100%),
+              var(--color-neutral-0);
+  background-color: var(--accent, var(--color-primary-500));
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.App_accountCard__c8WCB:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.App_accountCardTop__w3N5f {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.App_accountCard__c8WCB .App_accountCardTop__w3N5f * { color: rgba(255,255,255,0.9); }
+
+.App_accountBalance__l2DEd {
+  color: #fff !important;
+}
+
+/* Override button colors inside accountCard */
+.App_accountCard__c8WCB button {
+  border-color: rgba(255,255,255,0.5) !important;
+  color: #fff !important;
+}
+.App_accountCard__c8WCB button:hover:not(:disabled) {
+  background-color: rgba(255,255,255,0.15) !important;
+}
+
+/* ── Transactions ── */
+.App_section__NUm_9 {
+  margin-bottom: var(--space-8);
+}
+
+.App_sectionLabel__O3V4m {
+  margin-bottom: var(--space-4);
+}
+
+.App_txHeader__gVilX {
+  margin-bottom: var(--space-4);
+}
+
+.App_txList__bSmD3 {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.App_txRow___J2ez {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-neutral-100);
+}
+
+.App_txRow___J2ez:last-child {
+  border-bottom: none;
+}
+
+.App_txIcon__Qk2gl {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.App_txIconIn__wbrNZ {
+  background-color: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.App_txIconOut__orpe3 {
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-500);
+}
+
+.App_txInfo__q8fg6 {
+  flex: 1 1;
+  min-width: 0;
+}
+
+.App_txAmount__lSMIh {
+  text-align: right;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Send ── */
+.App_sendWrapper__euOTO {
+  display: flex;
+  justify-content: center;
+}
+
+.App_sendSuccess__P6tEH {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-16);
+  text-align: center;
+}
+
+.App_successIcon__CQucO {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: var(--color-success-light);
+  color: var(--color-success);
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Banner Register ── */
+.App_bannerMain__ZMSiL {
+  min-width: 0;
+}
+
+.App_bannerSide__Z_89P {
+  min-width: 0;
+}
+
+.App_bannerPreview__KVCRP {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.App_bannerLayout__F8Wb9 {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  grid-gap: var(--space-6);
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.App_bannerActions__xvCcK {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-neutral-200);
+}
+
+.App_bannerThumb__jVsU9 {
+  margin-top: var(--space-4);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-neutral-200);
+}
+
+.App_bannerThumbImg__dQe9_ {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.App_bannerPreviewImg__o1rwJ {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  display: block;
+}
+
+.App_bannerPreviewEmpty__3ajaE {
+  width: 100%;
+  height: 200px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-neutral-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .App_bannerLayout__F8Wb9 { grid-template-columns: 1fr; }
+  .App_summaryGrid__5dj5i { grid-template-columns: repeat(2, 1fr); }
+  .App_accountGrid__yKNrO { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .App_sidebar__1IG2t { display: none; }
+  .App_page___pGpQ { padding: var(--space-4); }
+  .App_summaryGrid__5dj5i { grid-template-columns: 1fr; }
+}
+

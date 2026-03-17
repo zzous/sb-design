@@ -49,13 +49,40 @@ const MENU: Menu1[] = [
   {
     id: 'operation', label: '개인',
     children: [
-      // {
-      //   id: 'banner-mgmt', label: '배너/이벤트 관리',
-      //   children: [
-      //     { id: 'banner-group', label: '배너관리', children: [{ id: 'banner', label: '배너등록' }] },
-      //     { id: 'event-group', label: '이벤트관리', children: [{ id: 'event-register', label: '이벤트 등록' }] },
-      //   ],
-      // },
+      {
+        id: 'banner-mgmt1', label: '상품가입/관리',
+        children: [
+          { id: 'banner-group', label: '추천상품', children: [{ id: 'banner', label: '우리 아이 금융상품 만들기' }] },
+          { id: 'event-group', label: '예적금', children: [{ id: 'event-register', label: '이벤트 등록' }] },
+          { id: 'event-group', label: '대출', children: 
+            [
+              { id: 'event-register', label: '대출 상품가입' },
+              { id: 'event-register', label: '신용대출' },
+              { id: 'event-register', label: 'KB부동산담보대출' },
+              { id: 'event-register', label: '전월세보증금대출' },
+              { id: 'event-register', label: '전세보증금반환보증' },
+              { id: 'event-register', label: '예금담보대출' }
+
+          ] },
+        ],
+      },
+      {
+        id: 'banner-mgmt2', label: '혜택',
+        children: [
+          { id: 'banner-group', label: '이벤트', children: []},
+          { id: 'banner-group', label: '쿠폰함', children: []},
+          { id: 'banner-group', label: '제휴혜택존', children: []},
+          { id: 'banner-group', label: '모바일 쿠폰샵', children: []},
+          { id: 'banner-group', label: '매일포인트 받기 서비스 해지', children: []},
+          { id: 'banner-group', label: '포인트통', children: []},
+          { id: 'banner-group', label: '모아런(More Run)', children: []},
+         
+        ],
+      },
+      {
+        id: 'banner-mgmt3', label: '생활',
+        children: [ ],
+      },
     ],
   },
   {
@@ -202,7 +229,6 @@ export default function ClientShell({ children }: { children: React.ReactNode })
                         className={`admin-menu-item dep2${openMenus.includes(dep2.id) ? ' active' : ''}`}
                         onClick={() => toggleMenu(dep2.id)}
                       >
-                        {dep2.id}
                         {dep2.label}
                       </button>
                       {openMenus.includes(dep2.id) && (
