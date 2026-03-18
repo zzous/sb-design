@@ -20,7 +20,7 @@ function pathToView(pathname: string): View {
     .find(([, cfg]) => cfg.path === pathname);
   return found ? found[0] : 'overview';
 }
-
+// menu
 interface MenuLeaf { id: string; label: string }
 interface Menu3    { id: string; label: string; children: MenuLeaf[] }
 interface Menu2    { id: string; label: string; children: Menu3[] }
