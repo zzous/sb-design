@@ -27,3 +27,6 @@ export type { SelectProps, SelectSize, SelectOption } from './components/Select'
 
 export { Icon } from './components/Icon';
 export type { IconProps, IconName, IconSize } from './components/Icon';
+
+export { DateRangePicker } from './components/DateRangePicker';
+export type { DateRangePickerProps } from './components/DateRangePicker';

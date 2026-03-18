@@ -13,6 +13,7 @@ const nextConfig = {
 
     config.resolve.alias = {
       ...config.resolve.alias,
+
       '@starbanking/design-system/styles': path.resolve(
         __dirname,
         '../../packages/design-system/src/tokens/index.css',

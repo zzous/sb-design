@@ -135,7 +135,6 @@
 
 /* ── Send ── */
 .sendWrapper {
-  display: flex;
   justify-content: center;
 }
 

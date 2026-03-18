@@ -161,7 +161,32 @@ input[type='password'].form-control {
   -moz-appearance: none;
   appearance: none;
 }
+.custom-select + .react-datepicker-wrapper {
+    margin-left: 10px;
+}
+.react-datepicker-wrapper {
+    border: 0;
+    margin-right: 10px;
+    padding: 0;
+    display: inline-block;
+}
+.react-datepicker__input-container {
+    width: 100%;
+    display: inline-block;
+    position: relative;
+}
 
+.react-datepicker__input-container > input {
+    border: 1px solid var(--base-bd-color);
+    color: #222;
+    border-radius: 3px;
+    width: 100%;
+    max-width: 110px;
+    height: 32px;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: 400;
+}
 .custom-select + .custom-select, .form-control + .custom-select, .custom-select + .form-control {
   margin-left: 8px !important;
 }

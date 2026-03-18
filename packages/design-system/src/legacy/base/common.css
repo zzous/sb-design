@@ -1445,6 +1445,27 @@ caption,
   display: flex;
 }
 
+ .date-picker .item {
+    display: flex;
+    align-items: center;
+  }
+
+ .date-picker .item .input {
+    display: flex;
+  }
+
+  
+  .date-picker .item > label{
+    font-weight: bold;
+    color: #222;
+  }
+
+  .date-picker .item > label + .input{
+    margin-left: 20px;
+  }
+  
+  
+
 .form-item .item>label {
   font-weight: bold;
   color: #222;

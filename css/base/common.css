@@ -1432,10 +1432,16 @@ caption,
   align-items: center;
 }
 
+.date-picker .item {
+  display: flex;
+  align-items: center;
+}
+
 .form-item .item {
   display: flex;
   align-items: center;
 }
+
 
 .form-item .item+.item {
   margin-left: 25px;
