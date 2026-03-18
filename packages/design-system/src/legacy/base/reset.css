@@ -164,7 +164,11 @@ input[type='button'] {
 }
 
 optgroup,
-pre {
+pre,
+input[type='date'],
+input[type='datetime-local'],
+input[type='month'],
+input[type='time'] {
   font-family: inherit;
 }
 
