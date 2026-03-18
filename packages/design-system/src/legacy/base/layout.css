@@ -396,6 +396,7 @@
 
 .admin-menu-item {
   display: inline-block;
+  position: relative;
   width: 100%;
   padding: 9px 5px 9px 20px;
   text-align: left;
@@ -409,17 +410,17 @@
 .admin-menu-item:not(.dep4, .window, .no-child)::after {
   content: '';
   position: absolute;
-  top: 8px;
+  top: 50%;
   right: 20px;
   width: 16px;
   height: 16px;
   background-image: url("data:image/svg+xml,%3Csvg width='16' height='17' viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.5 6.5L8 11L3.5 6.5' stroke='%23767676' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  transform: rotate(180deg);
+  transform: translateY(-50%) rotate(180deg);
   transition: transform .3s ease-out;
 }
 
 .admin-menu-item.active:not(.dep4, .window, .no-child)::after {
-  transform: rotate(0deg);
+  transform: translateY(-50%) rotate(0deg);
 }
 
 /* .admin-menu-item.window::after {

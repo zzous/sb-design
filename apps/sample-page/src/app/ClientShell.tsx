@@ -44,6 +44,12 @@ const MENU: Menu1[] = [
           { id: 'common-ui-components', label: 'UI 컴포넌트', children: [{ id: 'components', label: '디자인 시스템' }] },
         ],
       },
+      {
+        id: 'analytics-data', label: '데이터분석',
+        children: [
+          { id: 'analytics-status', label: '분석현황', children: [{ id: 'analytics', label: '데이터 분석' }, { id: 'ab-chart', label: '데이터분석(차트)' }] },
+        ],
+      },
     ],
   },
   {
@@ -86,9 +92,105 @@ const MENU: Menu1[] = [
     id: 'analytics-top', label: '기업',
     children: [
       {
-        id: 'analytics-data', label: '데이터분석',
+        id: 'corp-inquiry-transfer', label: '조회 / 이체',
         children: [
-          { id: 'analytics-status', label: '분석현황', children: [{ id: 'analytics', label: '데이터 분석' }, { id: 'ab-chart', label: '데이터분석(차트)' }] },
+          { id: 'corp-inquiry', label: '조회', children: [] },
+          { id: 'corp-transfer', label: '이체',  children: [] },
+        ],
+      },
+      {
+        id: 'corp-banking', label: '뱅킹업무',
+        children: [
+          { id: 'corp-banking-fund',      label: '자금관리',           children: [] },
+          { id: 'corp-banking-loan',      label: '대출',               children: [] },
+          { id: 'corp-banking-utility',   label: '공과금',             children: [] },
+          { id: 'corp-banking-pfund',     label: '펀드',               children: [] },
+          { id: 'corp-banking-deposit',   label: '예금/신탁',          children: [] },
+          { id: 'corp-banking-insurance', label: '보험/공제',          children: [] },
+          { id: 'corp-banking-etax',      label: '전자세금계산서발행', children: [] },
+        ],
+      },
+      {
+        id: 'corp-products', label: '금융상품',
+        children: [
+          { id: 'corp-product-home',      label: '금융상품 HOME', children: [] },
+          { id: 'corp-product-loan',      label: '대출',          children: [] },
+          { id: 'corp-product-insurance', label: '보험/공제',     children: [] },
+          { id: 'corp-product-deposit',   label: '예금',          children: [] },
+          { id: 'corp-product-fund',      label: '펀드',          children: [] },
+          { id: 'corp-product-trust',     label: '신탁',          children: [] },
+          { id: 'corp-product-checking',  label: '입출금',        children: [] },
+          { id: 'corp-product-coupon',    label: '쿠폰함',        children: [] },
+        ],
+      },
+      {
+        id: 'corp-b2b', label: 'B2B',
+        children: [
+          { id: 'corp-b2b-integrated', label: '통합서비스',          children: [] },
+          { id: 'corp-b2b-tax',        label: '세금계산서관리',      children: [] },
+          { id: 'corp-b2b-buyer',      label: '구매기업',            children: [] },
+          { id: 'corp-b2b-seller',     label: '판매기업',            children: [] },
+          { id: 'corp-b2b-enote',      label: '전자어음 및 기타상표', children: [] },
+        ],
+      },
+      {
+        id: 'corp-forex', label: '외환',
+        children: [
+          { id: 'corp-forex-home',    label: '외환 HOME',   children: [] },
+          { id: 'corp-forex-remit',   label: '외화송금',    children: [] },
+          { id: 'corp-forex-trade',   label: '수출입',      children: [] },
+          { id: 'corp-forex-fx',      label: 'FX/파생상품', children: [] },
+          { id: 'corp-forex-my',      label: '마이외환',    children: [
+            { id: 'corp-forex-my-transfer', label: '국내외화이체' },
+            { id: 'corp-forex-my-deposit',  label: '외화예금입출금' },
+          ]},
+          { id: 'corp-forex-overseas',       label: '해외투자/자본거래',           children: [] },
+          { id: 'corp-forex-rate',           label: '환율/금리',                   children: [] },
+          { id: 'corp-forex-deposit-query',  label: '외화예금조회',                children: [] },
+          { id: 'corp-forex-foreign-invest', label: '외국인직접투자/자본거래신고', children: [] },
+        ],
+      },
+      {
+        id: 'corp-esg', label: '경영지원 / ESG',
+        children: [
+          { id: 'corp-esg-policy',   label: '정책자금 맞춤추천',   children: [] },
+          { id: 'corp-esg-self',     label: 'ESG자가진단서비스',   children: [] },
+          { id: 'corp-esg-carbon',   label: '탄소관리시스템',      children: [] },
+          { id: 'corp-esg-contents', label: '사장님필수 콘텐츠',   children: [] },
+        ],
+      },
+      {
+        id: 'corp-service', label: '기업서비스',
+        children: [
+          { id: 'corp-svc-use', label: '서비스이용', children: [
+            { id: 'corp-svc-use-main',     label: '주거래매입자납부특례' },
+            { id: 'corp-svc-use-firm',     label: '펌뱅킹서비스' },
+            { id: 'corp-svc-use-connect',  label: '연결서비스' },
+            { id: 'corp-svc-use-id',       label: 'ID통합관리' },
+            { id: 'corp-svc-use-merchant', label: '가맹점 예치제도' },
+          ]},
+          { id: 'corp-svc-extra', label: '부가서비스', children: [
+            { id: 'corp-svc-extra-card',    label: '결제/구매전용카드' },
+            { id: 'corp-svc-extra-lead',    label: '리드뱅킹 회사서비스' },
+            { id: 'corp-svc-extra-kips',    label: 'KIPS/CLS' },
+            { id: 'corp-svc-extra-collect', label: '수납업무' },
+            { id: 'corp-svc-extra-epurch',  label: 'E-구매서비스' },
+            { id: 'corp-svc-extra-asset',   label: '통합금융자산관리' },
+            { id: 'corp-svc-extra-account', label: '서비스이용계좌조회' },
+            { id: 'corp-svc-extra-virtual', label: '가상계좌회계서비스' },
+          ]},
+          { id: 'corp-svc-etc', label: '기타', children: [
+            { id: 'corp-svc-etc-guide', label: '서비스안내' },
+            { id: 'corp-svc-etc-vip',   label: '기업고객 우대제도' },
+          ]},
+          { id: 'corp-svc-banking', label: '뱅킹관리', children: [
+            { id: 'corp-svc-banking-auth',     label: '결제/권한관리' },
+            { id: 'corp-svc-banking-internet', label: '인터넷뱅킹 관리' },
+            { id: 'corp-svc-banking-fund',     label: '자금관리' },
+            { id: 'corp-svc-banking-notice',   label: '통지/편의서비스 신청' },
+            { id: 'corp-svc-banking-guide',    label: '이용안내' },
+            { id: 'corp-svc-banking-account',  label: '계좌관리' },
+          ]},
         ],
       },
     ],
@@ -246,8 +348,8 @@ export default function ClientShell({ children }: { children: React.ReactNode })
                     <li key={dep2.id}>
                       <button
                         type="button"
-                        className={`admin-menu-item dep2${openMenus.includes(dep2.id) ? ' active' : ''}`}
-                        onClick={() => toggleMenu(dep2.id)}
+                        className={`admin-menu-item dep2${dep2.children.length === 0 ? ' no-child' : ''}${openMenus.includes(dep2.id) ? ' active' : ''}`}
+                        onClick={() => dep2.children.length > 0 ? toggleMenu(dep2.id) : undefined}
                       >
                         {dep2.label}
                       </button>
@@ -257,8 +359,8 @@ export default function ClientShell({ children }: { children: React.ReactNode })
                             <li key={dep3.id}>
                               <button
                                 type="button"
-                                className={`admin-menu-item dep3${openMenus.includes(dep3.id) ? ' active' : ''}`}
-                                onClick={() => toggleMenu(dep3.id)}
+                                className={`admin-menu-item dep3${dep3.children.length === 0 ? ' no-child' : ''}${openMenus.includes(dep3.id) ? ' active' : ''}`}
+                                onClick={() => dep3.children.length > 0 ? toggleMenu(dep3.id) : undefined}
                               >
                                 {dep3.label}
                               </button>
@@ -313,7 +415,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
 
         {/* ── Footer ── */}
         <footer id="adminFooter">
-          ⓒ2023 KB Ins. All rights Reserved1
+          ⓒ2023 KB Ins. All rights Reserved
         </footer>
       </div>
     </ToastProvider>
