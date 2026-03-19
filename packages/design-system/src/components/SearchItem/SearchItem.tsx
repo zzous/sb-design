@@ -38,7 +38,7 @@ export const SearchItem = ({ label, type,selectData, value, changeValue }: Searc
                     { selectData?.map((option, index) => (
                         <span key={index} className={'radio'}>
                             <input type="radio" id={`${label}-option${index}`} name={label} value={option.value} checked={value === option.value} onChange={chagngeValueHandler} />
-                            <label htmlFor={`${label}-option${index}`}>{option.label} {option.value}</label>
+                            <label htmlFor={`${label}-option${index}`}>{option.label} </label>
                         </span>
                     )) }
                 </span>
@@ -48,7 +48,7 @@ export const SearchItem = ({ label, type,selectData, value, changeValue }: Searc
                     { selectData?.map((option, index) => (
                         <span key={index} className={'checkbox'}>
                             <input type="checkbox" id={`${label}-option${index}`} name={label} value={option.value} checked={value === option.value} onChange={chagngeValueHandler} />
-                            <label htmlFor={`${label}-option${index}`}>{option.label} {option.value}</label>
+                            <label htmlFor={`${label}-option${index}`}>{option.label}</label>
                         </span>
                     )) }
                 </span>
