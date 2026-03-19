@@ -1384,6 +1384,7 @@ caption,
   padding: 26px 20px;
   border: 1px solid var(--base-bd-color);
   border-radius: 3px;
+  background:#fff
 }
 
 .ui-data-filter.no-line {
@@ -1424,7 +1425,7 @@ caption,
 }
 
 .form-item + .form-item {
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .form-item {
@@ -1432,18 +1433,22 @@ caption,
   align-items: center;
 }
 
-.form-item .item {
+.item {
   display: flex;
   align-items: center;
 }
 
-.form-item .item+.item {
+.item+.item {
   margin-left: 25px;
 }
 
-.form-item .item .input {
+ .item .input {
   display: flex;
 }
+.item > label{
+    font-weight: bold;
+    color: #222;
+  }
 
  .date-picker .item {
     display: flex;
@@ -1463,7 +1468,9 @@ caption,
   .date-picker .item > label + .input{
     margin-left: 20px;
   }
-  
+  .item > label + .input{
+    margin-left: 20px;
+  }
   
 
 .form-item .item>label {

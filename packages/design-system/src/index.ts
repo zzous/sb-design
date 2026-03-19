@@ -33,3 +33,12 @@ export type { DatePickerProps } from './components/DatePicker';
 
 export { DateRangePicker } from './components/DateRangePicker';
 export type { DateRangePickerProps } from './components/DateRangePicker';
+
+export { Pagination } from './components/Pagination';
+export type { PaginationProps } from './components/Pagination';
+
+export { SearchItem } from './components/SearchItem';
+export type { SearchItemProps } from './components/SearchItem';
+
+export { BaseButton } from './components/BaseButton';
+export type { BaseButtonProps } from './components/BaseButton';
