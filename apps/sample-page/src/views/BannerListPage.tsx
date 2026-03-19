@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { DateRangePicker } from '@starbanking/design-system';
+import { DateRangePicker, DatePicker } from '@starbanking/design-system';
 import styles from '../App.module.css';
 import { AgGridReact } from 'ag-grid-react';
 import { ModuleRegistry, AllCommunityModule, themeAlpine } from 'ag-grid-community';
@@ -30,12 +30,16 @@ export function BannerListPage() {
     console.log('날짜 변경:', { startDate, endDate });
   };
 
+  const handleDateChangeSingle = (date: Date | null) => {
+    console.log('날짜 변경:', date);
+  };
     return (
         
         <div className={styles.page}>
             <div className={styles.sendWrapper}>
+                <DatePicker onDateChange={handleDateChangeSingle} />
                 <div className="ui-data-filter">
-                <DateRangePicker label="기간검색" onDateChange={handleDateChange} />
+                    <DateRangePicker label="기간검색" onDateChange={handleDateChange} />
                 </div>
                 <div style={{ height: 400, width: '100%' }} className={"tbl-wrap"}>
                     <AgGridReact rowData={rowData} columnDefs={colDefs} theme={themeAlpine} domLayout="autoHeight" />
