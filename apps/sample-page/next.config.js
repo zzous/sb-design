@@ -2,7 +2,11 @@ const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  generateBuildId: async () => null,
+  output: 'export',
+  basePath: '/sb-design',
+  trailingSlash: true,
+  images: { unoptimized: true },
+  generateBuildId: async () => 'build',
   transpilePackages: ['@starbanking/design-system'],
   webpack(config) {
     // 디자인 시스템 legacy CSS에서 참조하는 XML 폰트 파일 처리
