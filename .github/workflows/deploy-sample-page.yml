@@ -35,6 +35,12 @@ jobs:
       - name: Build sample-page
         run: pnpm --filter @starbanking/sample-page build
 
+      - name: Build storybook
+        run: pnpm --filter @starbanking/design-system build-storybook
+
+      - name: Move storybook into sample-page output
+        run: mv packages/design-system/storybook-static apps/sample-page/out/storybook
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
